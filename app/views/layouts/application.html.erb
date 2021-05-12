@@ -11,6 +11,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/nav' %>
+    <% flash.each do |type, msg| %>
+      <div class="mt-5 alert <%= bootstrap_class_for_flash(type) %> alert-dismissable fade show">
+        <%= msg %>
+        <button class="close" data-dismiss="alert">x</button>
+      </div>
+    <% end %> 
+
+    <div class="container mt-5">
+      <%= yield %>
+    </div>
   </body>
 </html>

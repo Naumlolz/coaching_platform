@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <% if user_logged_in? %>
+      <li class="nav-item mr-3">
+        <span class="navbar-text">
+        Hello, <%= current_user.first_name %>
+        </span>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Log out', sign_out_path, class: 'btn btn-danger'%>
+      </li>
+      <% elsif coach_logged_in? %>
+      <li class="nav-item mr-3">
+        <span class="navbar-text">
+        Hello, <%= current_coach.first_name %>
+        </span>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Log out', sign_out_path, class: 'btn btn-danger' %>
+      </li>
+      <% else %>
+      <li class="nav-item">
+        <%= link_to 'Log In', sign_in_path, class: 'nav-link'%>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Sign up', sign_up_path, class: 'btn btn-success'%>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

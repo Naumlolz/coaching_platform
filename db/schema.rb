@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(version: 2021_04_30_095415) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.text "description"
-    t.integer "age", null: false
-    t.string "gender", null: false
+    t.integer "age"
+    t.string "gender"
     t.string "email", null: false
     t.string "password", null: false
-    t.string "expertise", null: false
-    t.string "education", null: false
-    t.string "experience", null: false
-    t.string "certificate", null: false
+    t.string "expertise"
+    t.string "education"
+    t.string "experience"
+    t.string "certificate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(version: 2021_04_30_095415) do
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.integer "age", null: false
+    t.integer "age"
     t.text "description"
-    t.string "gender", null: false
+    t.string "gender"
     t.string "email", null: false
     t.string "password", null: false
     t.bigint "coach_id"
