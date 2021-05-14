@@ -24,4 +24,14 @@ Rails.application.routes.draw do
 
   get '/coaches/finish_profile', to: 'coaches#finish_profile'
   post '/coaches/finish_coach_profile', to: 'coaches#finish_coach_profile'
+
+  get '/users/profile', to: 'users#profile'
+  post '/users/update_profile', to: 'users#update_profile'
+  get '/coaches/profile', to: 'coaches#profile'
+  post '/coaches/update_profile', to: 'coaches#update_profile'
+
+  get '/users/change_password', to: 'users#change_password'
+  post '/users/update_password', to: 'users#update_password'
+  get '/coaches/change_password', to: 'coaches#change_password'
+  post '/coaches/update_password', to: 'coaches#update_password'
 end
