@@ -21,4 +21,7 @@ Rails.application.routes.draw do
 
   get '/users/finish_profile', to: 'users#finish_profile'
   post '/users/finish_user_profile', to: 'users#finish_user_profile'
+
+  get '/coaches/finish_profile', to: 'coaches#finish_profile'
+  post '/coaches/finish_coach_profile', to: 'coaches#finish_coach_profile'
 end
