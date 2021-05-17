@@ -41,27 +41,14 @@ class UsersController < ApplicationController
   end
 
   def update_password
-    updated_password_user = current_user
-    old_password = params[:old_password]
-    user_db_password = BCrypt::Password.new(updated_password_user.password)
-    if user_db_password != old_password
-      flash[:error] = 'Password doesn`t match'
-      render 'change_password' and return
-    end
-
-    if params[:new_password] != params[:new_password_confirmation]
-      flash[:error] = 'New password doesn`t match'
-      render 'change_password' and return
-    end
-    updated_password_user.update(
-      password: BCrypt::Password.create(params[:new_password])
+    service = Users::UpdatePasswordService.new(
+      current_user, params[:old_password], params[:new_password],
+      params[:new_password_confirmation]
     )
-    if updated_password_user.valid?
-      flash[:success] = 'Your password was updated'
-      redirect_to users_dashboard_path
-    else
-      @errors = updated_password_user.errors.full_messages
-      render 'change_password'
-    end
+    service.call
+    redirect_to users_dashboard_path
+  rescue ServiceError => e
+    flash.now[:error] = e.message
+    render 'change_password'
   end
 end

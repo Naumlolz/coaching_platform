@@ -46,27 +46,14 @@ class CoachesController < ApplicationController
   end
 
   def update_password
-    updated_password_coach = current_coach
-    old_password = params[:old_password]
-    coach_db_password = BCrypt::Password.new(updated_password_coach.password)
-    if coach_db_password != old_password
-      flash[:error] = 'Password doesn`t match'
-      render 'change_password' and return
-    end
-
-    if params[:new_password] != params[:new_password_confirmation]
-      flash[:error] = 'New password doesn`t match'
-      render 'change_password' and return
-    end
-    updated_password_coach.update(
-      password: BCrypt::Password.create(params[:new_password])
+    service = Coaches::UpdatePasswordService.new(
+      current_coach, params[:old_password], params[:new_password],
+      params[:new_password_confirmation]
     )
-    if updated_password_coach.valid?
-      flash[:success] = 'Your password was updated'
-      redirect_to coaches_dashboard_path
-    else
-      @errors = updated_password_coach.errors.full_messages
-      render 'change_password'
-    end
+    service.call
+    redirect_to coaches_dashboard_path
+  rescue ServiceError => e
+    flash.now[:error] = e.message
+    render 'change_password'
   end
 end
