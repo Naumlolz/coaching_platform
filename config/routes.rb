@@ -34,4 +34,14 @@ Rails.application.routes.draw do
   post '/users/update_password', to: 'users#update_password'
   get '/coaches/change_password', to: 'coaches#change_password'
   post '/coaches/update_password', to: 'coaches#update_password'
+
+  get '/users/all_coaches', to: 'users#all_coaches'
+  post '/users/invite_coach', to: 'users#invite_coach', as: :invite_coach
+  post '/users/unassign_coach', to: 'users#unassign_coach'
+  post '/users/unassign_coach', to: 'users#unassign_coach'
+
+  get '/coaches/my_users', to: 'coaches#my_users'
+  get '/coaches/waiting_for_confirmation', to: 'coaches#waiting_for_confirmation'
+  post '/coaches/accept_invite', to: 'coaches#accept_invite'
+  post '/coaches/decline_invite', to: 'coaches#decline_invite'
 end

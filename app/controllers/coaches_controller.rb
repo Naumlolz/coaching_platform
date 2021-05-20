@@ -56,4 +56,30 @@ class CoachesController < ApplicationController
     flash.now[:error] = e.message
     render 'change_password'
   end
+
+  def my_users
+    @users = current_coach.users
+  end
+
+  def waiting_for_confirmation
+    @current_coach_invitations = current_coach.users_coaches_invitations.where(accepted: nil)
+  end
+
+  def accept_invite
+    invite = Coaches::InviteService.new(current_coach.id, params[:invitation_id])
+    invite.call
+    flash[:success] = 'You`ve assigned user!'
+    redirect_to coaches_waiting_for_confirmation_path
+  rescue ServiceError => e
+    flash[:error] = e.message
+    redirect_to coaches_waiting_for_confirmation_path
+  end
+
+  def decline_invite
+    declined_invite = UsersCoachesInvitation.find_by(id: params[:invitation_id])
+    declined_invite.update(
+      accepted: false
+    )
+    redirect_to coaches_waiting_for_confirmation_path
+  end
 end

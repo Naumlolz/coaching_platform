@@ -1,0 +1,12 @@
+<h5>My users</h5>
+<div class="row">
+  <% @users.each do |user|%>
+    <div class="card mr-5 mb-5" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= user.first_name %> <%= user.last_name %></h5>
+        <p class="card-text">Age: <%= user.age %></p>
+        <p class="card-text">Gender: <%= user.gender %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

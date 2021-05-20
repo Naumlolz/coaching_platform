@@ -1,0 +1,20 @@
+<h5> Waiting for confirmation </h5>
+
+<div class="row">
+  <% @current_coach_invitations.each do |invitation| %>
+    <div class="card mr-5 mb-5" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= invitation.user.first_name %> <%= invitation.user.last_name %></h5>
+        <p class="card-text">Age: <%= invitation.user.age %></p>
+        <p class="card-text">Gender: <%= invitation.user.gender %></p>
+        <p class="card-text"><%= invitation.user.description %></p>
+        <%= link_to 'Refuse', coaches_decline_invite_path(
+          invitation_id: invitation.id
+          ), method: :post, class: 'btn btn-primary' %>
+        <%= link_to 'Confirm', coaches_accept_invite_path(
+          invitation_id: invitation.id
+          ), method: :post, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

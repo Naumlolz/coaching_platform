@@ -51,4 +51,29 @@ class UsersController < ApplicationController
     flash.now[:error] = e.message
     render 'change_password'
   end
+
+  def all_coaches
+    @coaches = Coach.all
+    @current_coach = current_user.coach
+  end
+
+  def invite_coach
+    invitation = Users::InviteCoachService.new(
+      current_user, params[:coach_id]
+    )
+    invitation.call
+    flash[:success] = 'You`ve successfully sent invitation'
+    redirect_to users_dashboard_path
+  rescue ServiceError => e
+    flash[:error] = e.message
+    redirect_to users_dashboard_path
+  end
+
+  def unassign_coach
+    user = current_user
+    user.update(
+      coach_id: nil
+    )
+    redirect_to users_all_coaches_path
+  end
 end
