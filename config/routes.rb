@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   get '/users/all_coaches', to: 'users#all_coaches'
   post '/users/invite_coach', to: 'users#invite_coach', as: :invite_coach
   post '/users/unassign_coach', to: 'users#unassign_coach'
-  post '/users/unassign_coach', to: 'users#unassign_coach'
 
   get '/coaches/my_users', to: 'coaches#my_users'
   get '/coaches/waiting_for_confirmation', to: 'coaches#waiting_for_confirmation'

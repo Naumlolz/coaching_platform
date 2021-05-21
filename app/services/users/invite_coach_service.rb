@@ -5,14 +5,14 @@ class Users::InviteCoachService
   end
 
   def call
-    check_if_have_coach
+    check_coach_present
     check_coach_counter
     create_invitation
   end
 
   private
 
-  def check_if_have_coach
+  def check_coach_present
     if @user.coach_id.present?
       raise ServiceError, "You already have coach"
     end

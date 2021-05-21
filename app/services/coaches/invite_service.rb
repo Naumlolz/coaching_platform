@@ -1,4 +1,4 @@
-class Coaches::InviteService
+class Coaches::AcceptInviteService
   def initialize(coach_id, invite_id)
     @coach_id = coach_id
     @invite_id = invite_id
