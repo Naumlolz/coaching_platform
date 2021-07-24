@@ -43,4 +43,6 @@ Rails.application.routes.draw do
   get '/coaches/waiting_for_confirmation', to: 'coaches#waiting_for_confirmation'
   post '/coaches/accept_invite', to: 'coaches#accept_invite'
   post '/coaches/decline_invite', to: 'coaches#decline_invite'
+
+  get '/techniques/library', to: 'techniques#library'
 end
