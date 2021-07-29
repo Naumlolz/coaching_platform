@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <% if user_logged_in? %>
+      <li class="nav-item mr-5">
+        <%= link_to 'Coaches', users_all_coaches_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item mr-3">
+        <span class="navbar-text">
+        Hello, <%= link_to current_user.first_name, users_profile_path %>
+        </span>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Change password', users_change_password_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Log out', sign_out_path, class: 'btn btn-danger'%>
+      </li>
+      <% elsif coach_logged_in? %>
+      <li class="nav-item mr-5">
+        <%= link_to 'My users', coaches_my_users_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item mr-5">
+        <%= link_to 'Waiting for confirmation', coaches_waiting_for_confirmation_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item mr-5">
+        <%= link_to 'Library', techniques_library_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item mr-3">
+        <span class="navbar-text">
+        Hello, <%= link_to current_coach.first_name, coaches_profile_path %>
+        </span>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Change password', coaches_change_password_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Log out', sign_out_path, class: 'btn btn-danger' %>
+      </li>
+      <% else %>
+      <li class="nav-item">
+        <%= link_to 'Log In', sign_in_path, class: 'nav-link'%>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Sign up', sign_up_path, class: 'btn btn-success'%>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

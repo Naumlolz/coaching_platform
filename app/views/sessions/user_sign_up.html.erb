@@ -1,0 +1,33 @@
+<h1>Sign up as User</h1>
+<%= form_with url: users_sign_up_path, method: :post do |f|%>
+  <% if @errors.present? %>
+    <div class="alert alert-danger" role="alert">
+      <%= @errors %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <label for="first_name">First Name</label>
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <label for="last_name">Last Name</label>
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <label for="password">Password</label>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <label for="confirm_password">Confirm Password</label>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+  <%= f.submit 'Sign up', class: 'btn btn-primary'%>
+<% end %>

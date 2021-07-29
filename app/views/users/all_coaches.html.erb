@@ -1,0 +1,76 @@
+
+<% if @current_coach.present?%>
+  <h2>Current Coach</h2>
+  <div class="card mr-5 mb-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= @current_coach.first_name %> <%= @current_coach.last_name %></h5>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#endCooperation<%= @current_coach.id %>">
+        End cooperation
+      </button>
+    </div>
+  </div>
+
+  <div class="modal fade" id="endCooperation<%= @current_coach.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Coach information: <%= @current_coach.first_name %> <%= @current_coach.last_name %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <h5 class="card-title"><%= @current_coach.first_name %> <%= @current_coach.last_name %></h5>
+          Are you sure you want to cancel your invitation to cooperation with this coach?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <%= link_to 'Yes I want', users_unassign_coach_path, method: :post, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<h1>Coaches list</h1>
+<div class="row">
+  <% @coaches.each do |coach|%>
+    <div class="card mr-5 mb-5" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= coach.first_name %> <%= coach.last_name %></h5>
+        <p class="card-text">Age: <%= coach.age %></p>
+        <p class="card-text">Area of expertise: <%= coach.expertise %></p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inviteCoach<%= coach.id %>">
+          See details
+        </button>
+      </div>
+    </div>
+
+    <div class="modal fade" id="inviteCoach<%= coach.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Coach information: <%= coach.first_name %> <%= coach.last_name %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <h5 class="card-title"><%= coach.first_name %> <%= coach.last_name %></h5>
+            <p class="card-text">Age: <%= coach.age %></p>
+            <p class="card-text">Area of expertise: <%= coach.expertise %></p>
+            <p class="card-text">Education: <%= coach.education %></p>
+            <p class="card-text">Work Experience: <%= coach.experience %></p>
+            <p class="card-text">Licences and certificates: <%= coach.certificate %></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= link_to 'Send Invitation', invite_coach_path(coach_id: coach.id), method: :post, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
