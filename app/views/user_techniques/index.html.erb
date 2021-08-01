@@ -1,0 +1,12 @@
+<h1> Hello Index </h1>
+<h5>My techniques</h5>
+<div class="row">
+  <% @users_techniques.each do |users_technique|%>
+    <div class="card mr-5 mb-5" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= users_technique.technique.name %></h5>
+        <p class="card-text"> <%= users_technique.technique.description %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -15,6 +15,9 @@
       <li class="nav-item mr-5">
         <%= link_to 'Coaches', users_all_coaches_path, class: 'nav-link' %>
       </li>
+      <li class="nav-item mr-5">
+        <%= link_to 'My Techniques', user_techniques_path, class: 'nav-link' %>
+      </li>
       <li class="nav-item mr-3">
         <span class="navbar-text">
         Hello, <%= link_to current_user.first_name, users_profile_path %>
