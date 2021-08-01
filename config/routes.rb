@@ -47,4 +47,6 @@ Rails.application.routes.draw do
   post '/coaches/decline_invite', to: 'coaches#decline_invite'
 
   get '/techniques/library', to: 'techniques#library'
+
+  resources :user_techniques, only: [:index]
 end
