@@ -12,7 +12,6 @@ class CoachesController < ApplicationController
       age: params[:age],
       gender: params[:gender],
       description: params[:description],
-      expertise: params[:expertise],
       education: params[:education],
       experience: params[:experience],
       certificate: params[:certificate],
@@ -21,6 +20,15 @@ class CoachesController < ApplicationController
   end
 
   def profile
+  end
+
+  def update_expertise
+    coaches_programs = params[:coach][:program_ids]
+    CoachesProgram.where(coach_id: current_coach.id).destroy_all
+    coaches_programs.each do |program_id|
+      CoachesProgram.create(coach_id: current_coach.id, program_id: program_id)
+    end
+    redirect_to coaches_profile_path
   end
 
   def update_profile
@@ -37,7 +45,7 @@ class CoachesController < ApplicationController
 
   def coach_params
     params.require(:coach).permit(
-      :first_name, :last_name, :age, :avatar, :expertise,
+      :first_name, :last_name, :age, :avatar,
       :education, :experience, :certificate
     )
   end

@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="form-group">
-    <label for="email">Avatar</label>
+    <label for="avatar">Avatar</label>
     <%= f.file_field :avatar, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <label for="email">First Name</label>
+    <label for="first_name">First Name</label>
     <%= f.text_field :first_name, class: 'form-control' %>
   </div>
 
@@ -27,13 +27,8 @@
   </div>
 
   <div class="form-group">
-    <label for="last_name">Age</label>
+    <label for="age">Age</label>
     <%= f.text_field :age, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <label for="description">Areas of expertise</label>
-    <%= f.text_field :expertise, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -51,4 +46,15 @@
     <%= f.text_field :certificate, class: 'form-control' %>
   </div>
   <%= f.submit 'Update', class: 'btn btn-primary' %>
+<% end %>
+<br>
+<h3>Areas of Expertise</h3>
+<%= form_with scope: :coach, url: update_expertise_coaches_path, method: :post do |f|%>
+  <div class="form-check">
+    <%= f.collection_check_boxes :program_ids, Program.all, :id, :name do |c| %>
+      <%= c.check_box %>
+      <%= c.label %><br>
+    <% end %>
+  </div>
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
 <% end %>

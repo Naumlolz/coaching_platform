@@ -40,7 +40,6 @@
       <div class="card-body">
         <h5 class="card-title"><%= coach.first_name %> <%= coach.last_name %></h5>
         <p class="card-text">Age: <%= coach.age %></p>
-        <p class="card-text">Area of expertise: <%= coach.expertise %></p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inviteCoach<%= coach.id %>">
           See details
         </button>
@@ -60,7 +59,6 @@
           <div class="modal-body">
             <h5 class="card-title"><%= coach.first_name %> <%= coach.last_name %></h5>
             <p class="card-text">Age: <%= coach.age %></p>
-            <p class="card-text">Area of expertise: <%= coach.expertise %></p>
             <p class="card-text">Education: <%= coach.education %></p>
             <p class="card-text">Work Experience: <%= coach.experience %></p>
             <p class="card-text">Licences and certificates: <%= coach.certificate %></p>
