@@ -23,11 +23,11 @@ class CoachesController < ApplicationController
   end
 
   def update_expertise
-    coaches_programs = params[:coach][:program_ids]
-    CoachesProgram.where(coach_id: current_coach.id).destroy_all
-    coaches_programs.each do |program_id|
-      CoachesProgram.create(coach_id: current_coach.id, program_id: program_id)
-    end
+    coaches_programs_ids = params[:coach][:program_ids].reject {|c| c.empty? }
+    service = Coaches::UpdateExpertiseService.new(
+      coach_id: current_coach.id, program_ids: coaches_programs_ids
+    )
+    service.perform
     redirect_to coaches_profile_path
   end
 
