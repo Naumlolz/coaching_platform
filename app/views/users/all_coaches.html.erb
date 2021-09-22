@@ -1,9 +1,12 @@
-
 <% if @current_coach.present?%>
   <h2>Current Coach</h2>
   <div class="card mr-5 mb-5" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= @current_coach.first_name %> <%= @current_coach.last_name %></h5>
+      <p class="card-text"><%= @current_coach.age %> years | <%= @current_coach.gender%></p>
+      <p class="card-text"><% @current_coach.programs.each do |program| %></p>
+        <%= program.name %>
+      <% end %>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#endCooperation<%= @current_coach.id %>">
         End cooperation
       </button>

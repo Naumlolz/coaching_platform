@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get '/techniques/library', to: 'techniques#library'
 
   resources :user_techniques, only: [:index]
+  resources :user_programs, only: [:index, :update]
   resources :coaches do
     collection do
       post 'update_expertise'

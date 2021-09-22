@@ -1,0 +1,46 @@
+<% if @current_program.present?%>
+  <h2> Current program </h2>
+  <div class="card mr-5 mb-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= @current_program.name %></h5>
+      <p class="card-text"> <%= @current_program.description %></p>
+    </div>
+  </div>
+<% end %>
+
+<h1> Programs list</h1>
+<div class="row">
+  <% @coach_programs.each do |coach_program|%>
+    <div class="card mr-5 mb-5" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= coach_program.name %></h5>
+        <p class="card-text"> <%= coach_program.description %></p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#chooseProgram<%= coach_program.id %>">
+          See details
+        </button>
+      </div>
+    </div>
+    <div class="modal fade" id="chooseProgram<%= coach_program.id %>" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Program information:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5 class="card-title"><%= coach_program.name %></h5>
+            <p class="card-text"><% coach_program.techniques.each do |program_technique| %></p>
+              <%= program_technique.name %>,
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= link_to 'Choose program', user_program_path(id: coach_program.id), method: :patch, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
