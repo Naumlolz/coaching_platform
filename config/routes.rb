@@ -46,10 +46,9 @@ Rails.application.routes.draw do
   post '/coaches/accept_invite', to: 'coaches#accept_invite'
   post '/coaches/decline_invite', to: 'coaches#decline_invite'
 
-  get '/techniques/library', to: 'techniques#library'
-
   resources :user_techniques, only: [:index]
   resources :user_programs, only: [:index, :update]
+  resources :coach_programs, only: [:index]
   resources :coaches do
     collection do
       post 'update_expertise'

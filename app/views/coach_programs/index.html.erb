@@ -1,0 +1,16 @@
+<h1> My programs</h1>
+<div class="row">
+  <% @coach_programs.each do |coach_program|%>
+    <h2><%= coach_program.program.name %></h2>
+    <div class="row">
+      <% coach_program.program.techniques.each do |program_technique| %>
+        <div class="card mr-5 mb-5" style="width: 18rem;">
+          <div class="card-body">
+            <h3 class="card-title"><%= program_technique.name %> </h3>
+            <p class="card-text"> <%= program_technique.description %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
