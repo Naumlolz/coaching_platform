@@ -1,12 +1,22 @@
-<h1>My techniques</h1>
+<h1 class="my_techniques pr-5 mb-4">My techniques</h1>
 <div class="row">
   <% @users_techniques.each do |users_technique|%>
     <div class="card mr-5 mb-5" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title"><%= users_technique.technique.name %></h5>
+        <% passed_steps = users_technique.technique.user_completed_steps.count%>
+        <span class="step_counter" style="color: purple"><%=passed_steps%>/<%= users_technique.technique.steps.count%> steps passed</span>
+        <span class="badge badge-pill badge-info mb-3"><h5 class="card-title"><%= users_technique.technique.name %></h5></span>
         <p class="card-text"> <%= users_technique.technique.description %></p>
-        <h4 class="card-title"><%= users_technique.technique.program.name %></h4>
+        <div class="d-inline-flex p-2 bd-highlight"><%= users_technique.technique.program.name %></div>
       </div>
     </div>
   <% end %>
 </div>
+
+<style>
+  .step_counter {
+    position:absolute;
+    top:0;
+    left:0;
+  }
+</style>

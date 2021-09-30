@@ -1,13 +1,32 @@
 <% if @current_coach.present?%>
-  <h2>Current Coach</h2>
+  <style>
+    h2 {
+      color: rgb(134,69,134);
+      font-size: 2.1em;
+    }
+    body {
+      font: italic 16px fantasy;
+      line-height: 1.5em;
+    }
+    #coach_name {
+      background-color: rgb(51, 255, 255);
+      font-weight: bold;
+    }
+    .card-body{
+    }
+    .btn {
+      text-align: center;
+    }
+  </style>
+  <h2 class="ml-5 mb-3 pr-1">Current Coach</h2>
   <div class="card mr-5 mb-5" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title"><%= @current_coach.first_name %> <%= @current_coach.last_name %></h5>
+      <h5 id="coach_name" class="card-title"><%= @current_coach.first_name %> <%= @current_coach.last_name %></h5>
       <p class="card-text"><%= @current_coach.age %> years | <%= @current_coach.gender%></p>
       <p class="card-text"><% @current_coach.programs.each do |program| %></p>
-        <%= program.name %>
+        <p class="card-text"><%= program.name %></p>
       <% end %>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#endCooperation<%= @current_coach.id %>">
+      <button type="button" class="btn btn-outline-info text-dark shadow-lg p-2" data-toggle="modal" data-target="#endCooperation<%= @current_coach.id %>">
         End cooperation
       </button>
     </div>
@@ -41,10 +60,10 @@
   <% @coaches.each do |coach|%>
     <div class="card mr-5 mb-5" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title"><%= coach.first_name %> <%= coach.last_name %></h5>
-        <p class="card-text"><%= coach.age %> years | <%= coach.gender%></p>
+        <h5 class="card-title text-center"><%= coach.first_name %> <%= coach.last_name %></h5>
+        <p class="card-text text-center"><%= coach.age %> years | <%= coach.gender%></p>
         <p class="card-text"><% coach.programs.each do |program| %></p>
-          <%= program.name %>
+          <p class="card-text text-center"><%= program.name %></p>
         <% end %>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inviteCoach<%= coach.id %>">
           See details

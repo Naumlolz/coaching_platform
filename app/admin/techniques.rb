@@ -7,7 +7,7 @@ ActiveAdmin.register Technique do
     f.inputs "Technique" do
       f.input :name
       f.input :description
-      f.input :program_id, as: :select, collection: Program.all.collect {|program| [program.name, program.id] }
+      f.input :program_id, as: :select, collection: Program.all.pluck(:name, :id)
     end
     f.actions
   end
