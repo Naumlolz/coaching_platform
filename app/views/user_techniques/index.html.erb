@@ -4,10 +4,22 @@
     <div class="card mr-5 mb-5" style="width: 18rem;">
       <div class="card-body">
         <% passed_steps = users_technique.technique.user_completed_steps.count%>
-        <span class="step_counter" style="color: purple"><%=passed_steps%>/<%= users_technique.technique.steps.count%> steps passed</span>
+        <% total_steps = users_technique.technique.steps.count%>
+        <span class="step_counter" style="color: purple"><%= passed_steps %>/<%= total_steps %> steps passed</span>
         <span class="badge badge-pill badge-info mb-3"><h5 class="card-title"><%= users_technique.technique.name %></h5></span>
         <p class="card-text"> <%= users_technique.technique.description %></p>
         <div class="d-inline-flex p-2 bd-highlight"><%= users_technique.technique.program.name %></div>
+        <% current_step = Step.find_by(technique_id: users_technique.technique_id,
+                          position: passed_steps)%>
+        <div>
+          <% if passed_steps > 0 %>
+            <%= link_to 'Continue', step_path(id: current_step.id),
+                method: :get, class: 'btn btn-dark'%>
+          <% else %>
+            <%= link_to 'Get Started', step_path(id: current_step.id),
+                method: :get, class: 'btn btn-dark'%>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>

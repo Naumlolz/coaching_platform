@@ -49,6 +49,11 @@ Rails.application.routes.draw do
   resources :user_techniques, only: [:index]
   resources :user_programs, only: [:index, :update]
   resources :coach_programs, only: [:index]
+  resources :steps, only: [:show] do
+    member do
+      post 'perform_complete'
+    end
+  end
   resources :coaches do
     collection do
       post 'update_expertise'
