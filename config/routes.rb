@@ -53,6 +53,9 @@ Rails.application.routes.draw do
     member do
       post 'perform_complete'
     end
+    collection do
+      post 'restart'
+    end
   end
   resources :coaches do
     collection do

@@ -1,7 +1,38 @@
 <div class="card bg-light mb-3" style="max-width: 180rem;">
-  <div class="card-header"><%= @step.technique.name %>; technique`s name</div>
+  <div id="STEP" class="card-header">
+    <%= @current_technique.name %>
+    <% if @step.position == 1 %>
+      <span><%= @step.position%> step completed<span>
+    <% else %>
+      <span><%= @step.position%> steps completed<span>
+    <% end %>
+  </div>
   <div class="card-body">
     <h5 class="card-title"><%= @step.title %></h5>
     <p class="card-text"><%= @step.body %></p>
   </div>
 </div>
+<div class="passed">
+  <%= link_to 'Passed', perform_complete_step_path(
+                id: @step.id, technique_id: @current_technique.id,
+                position: @step.position),
+                method: :post, class: 'btn btn-dark'%>
+</div>
+<div class="restart">
+  <%= link_to 'Restart', restart_steps_path(
+                technique_id: @current_technique.id),
+                method: :post, class: 'btn btn-dark'%>
+</div>
+<style>
+  .passed {
+    position: absolute;
+    right: 7.3em;
+  }
+  .card-header {
+    text-align: left;
+  }
+  #STEP {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
