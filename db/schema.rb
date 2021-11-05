@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_24_071229) do
+ActiveRecord::Schema.define(version: 2021_11_03_151404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 2021_09_24_071229) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["coach_id"], name: "index_coaches_programs_on_coach_id"
     t.index ["program_id"], name: "index_coaches_programs_on_program_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.boolean "sent_by_coach", default: false
+    t.bigint "user_id"
+    t.bigint "coach_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["coach_id"], name: "index_messages_on_coach_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -180,6 +191,8 @@ ActiveRecord::Schema.define(version: 2021_09_24_071229) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "coaches_programs", "coaches"
   add_foreign_key "coaches_programs", "programs"
+  add_foreign_key "messages", "coaches"
+  add_foreign_key "messages", "users"
   add_foreign_key "steps", "techniques"
   add_foreign_key "techniques", "programs"
   add_foreign_key "user_completed_steps", "steps"

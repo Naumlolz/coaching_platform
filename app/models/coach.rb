@@ -8,4 +8,5 @@ class Coach < ApplicationRecord
   has_many :users_coaches_invitations
   has_many :coaches_programs
   has_many :programs, through: :coaches_programs
+  has_many :messages, dependent: :destroy
 end

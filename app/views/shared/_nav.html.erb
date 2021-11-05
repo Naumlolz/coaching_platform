@@ -21,6 +21,9 @@
       <li class="nav-item mr-5">
         <%= link_to 'My Programs', user_programs_path, class: 'nav-link' %>
       </li>
+      <li class="nav-item mr-5">
+        <%= link_to 'My Messages', messages_path, class: 'nav-link' %>
+      </li>
       <li class="nav-item mr-3">
         <span class="navbar-text">
         Hello, <%= link_to current_user.first_name, users_profile_path %>

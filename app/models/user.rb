@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :users_coaches_invitations
   has_many :user_completed_steps
   has_many :steps, through: :user_completed_steps
+  has_many :messages, dependent: :destroy
 end

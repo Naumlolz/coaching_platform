@@ -1,0 +1,56 @@
+<h1 class="my_messages pr-5 mb-4">My messages</h1>
+<div id="YOLO" class="box">
+  <% @messages.each do |message| %>
+    <% if message.sent_by_coach == false %>
+      <div class="container-user">
+        <p><%= message.body %></p>
+      </div>
+    <% else %>
+      <div class="container-coach">
+        <p><%= message.body %></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_with url: messages_path, method: :post do |f|%>
+  <% if @errors.present? %>
+    <div class="alert alert-danger" role="alert">
+      <%= @errors %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label for="textMessage">Write message</label>
+    <%= f.text_field :body, class: 'form-control' %>
+  </div>
+  <%= f.submit 'Send', class: 'btn btn-primary' %>
+<% end %>
+
+<style>
+  #YOLO {
+    width: 50%;
+    height: 300px;
+    background-color: rgb(234,212,233);
+    margin-top: 7px;
+  }
+
+  .form-group {
+    margin-top: 10px;
+    width: 50%;
+  }
+
+  .container-user {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: right;
+  }
+
+  .container-coach {
+    border-color: #ccc;
+    background-color: #2af1ac;
+  }
+</style>
