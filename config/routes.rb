@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   resources :user_techniques, only: [:index]
   resources :user_programs, only: [:index, :update]
   resources :coach_programs, only: [:index]
-  resources :messages, only: [:index, :create]
+  resources :user_messages, only: [:index, :create]
   resources :steps, only: [:show] do
     member do
       post 'perform_complete'

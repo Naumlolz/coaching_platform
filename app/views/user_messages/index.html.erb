@@ -13,7 +13,7 @@
   <% end %>
 </div>
 
-<%= form_with url: messages_path, method: :post do |f|%>
+<%= form_with url: user_messages_path, method: :post do |f|%>
   <% if @errors.present? %>
     <div class="alert alert-danger" role="alert">
       <%= @errors %>

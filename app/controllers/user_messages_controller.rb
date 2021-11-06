@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class UserMessagesController < ApplicationController
   def index
     @messages = Message.where(user_id: current_user.id)
   end
@@ -11,9 +11,9 @@ class MessagesController < ApplicationController
       coach_id: coach.id
     )
     service.perform
-    redirect_to messages_path
+    redirect_to user_messages_path
   rescue ServiceError => e
     flash.now[:error] = e.message
-    redirect_to messages_path
+    redirect_to user_messages_path
   end
 end
