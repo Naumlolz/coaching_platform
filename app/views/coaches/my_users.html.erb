@@ -7,6 +7,10 @@
         <p class="card-text">Age: <%= user.age %></p>
         <p class="card-text">Gender: <%= user.gender %></p>
       </div>
+      <div class="send-message mb-3">
+        <%= link_to 'Send message', coach_messages_path(user_id: user.id),
+                    method: :get, class: 'btn btn-dark'%>
+      </div>
     </div>
   <% end %>
 </div>
