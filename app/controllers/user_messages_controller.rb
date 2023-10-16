@@ -11,9 +11,9 @@ class UserMessagesController < ApplicationController
       coach_id: coach.id
     )
     service.perform
-    redirect_to user_messages_path
+    SendUserMessageJob.perform_later(service)
   rescue ServiceError => e
     flash.now[:error] = e.message
-    redirect_to user_messages_path
+    SendUserMessageJob.perform_later(service)
   end
 end
