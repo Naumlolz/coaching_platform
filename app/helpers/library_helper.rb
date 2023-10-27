@@ -1,4 +1,3 @@
 module LibraryHelper
-  def testmethod
-  end
+  def testmethod; end
 end

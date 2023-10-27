@@ -4,7 +4,7 @@ ActiveAdmin.register Step do
   form do |f|
     f.semantic_errors *f.object.errors.keys
 
-    f.inputs "Step" do
+    f.inputs 'Step' do
       f.input :title
       f.input :body
       f.input :position

@@ -4,7 +4,7 @@ ActiveAdmin.register Program do
   form do |f|
     f.semantic_errors *f.object.errors.keys
 
-    f.inputs "Program" do
+    f.inputs 'Program' do
       f.input :name
       f.input :description
     end
