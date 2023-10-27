@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  validates :body, :user_id, :coach_id, presence: :true
+  validates :body, :user_id, :coach_id, presence: true
   validates :sent_by_coach, inclusion: { in: [true, false] }
 
   belongs_to :user, optional: true

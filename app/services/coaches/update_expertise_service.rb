@@ -3,7 +3,7 @@ class Coaches::UpdateExpertiseService
     @coach_id = params[:coach_id]
     @program_ids = params[:program_ids]
   end
-  
+
   def perform
     destroy_expertise
     create_expertise

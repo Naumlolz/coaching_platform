@@ -5,21 +5,19 @@ class UsersController < ApplicationController
     redirect_to users_finish_profile_path if current_user.age.blank?
   end
 
-  def finish_profile
-  end
+  def finish_profile; end
 
   def finish_user_profile
     user = current_user
     user.update(
       age: params[:age],
       gender: params[:gender],
-      description: params[:description],
+      description: params[:description]
     )
     redirect_to users_dashboard_path
   end
 
-  def profile
-  end
+  def profile; end
 
   def update_profile
     updated_user = current_user
@@ -37,8 +35,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :age, :avatar)
   end
 
-  def change_password
-  end
+  def change_password; end
 
   def update_password
     service = Users::UpdatePasswordService.new(

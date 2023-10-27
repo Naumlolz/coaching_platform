@@ -1,14 +1,11 @@
 class SessionsController < ApplicationController
   include BCrypt
 
-  def sign_in
-  end
+  def sign_in; end
 
-  def sign_up
-  end
-  
-  def user_sign_in
-  end
+  def sign_up; end
+
+  def user_sign_in; end
 
   def user_perform_sign_in
     @user = User.find_by(email: params[:email])
@@ -17,7 +14,7 @@ class SessionsController < ApplicationController
       render 'user_sign_in' and return
     end
     hashed_password = BCrypt::Password.new(@user.password)
-    
+
     if hashed_password == params[:password]
       flash[:success] = 'Sign in is successfull!'
       session[:member_type] = 'User'
@@ -29,8 +26,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def user_sign_up
-  end
+  def user_sign_up; end
 
   def user_perform_sign_up
     @user = User.find_by(email: params[:email])
@@ -60,8 +56,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def coach_sign_in
-  end
+  def coach_sign_in; end
 
   def coach_perform_sign_in
     @coach = Coach.find_by(email: params[:email])
@@ -70,7 +65,7 @@ class SessionsController < ApplicationController
       render 'coach_sign_in' and return
     end
     hashed_password = BCrypt::Password.new(@coach.password)
-    
+
     if hashed_password == params[:password]
       flash[:success] = 'Sign in is successfull!'
       session[:member_type] = 'Coach'
@@ -82,8 +77,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def coach_sign_up
-  end
+  def coach_sign_up; end
 
   def coach_perform_sign_up
     @user = User.find_by(email: params[:email])

@@ -17,12 +17,9 @@ class Coaches::UpdatePasswordService
 
   def check_old_password
     coach_db_password = BCrypt::Password.new(@coach.password)
-    if coach_db_password != @old_password
-      raise ServiceError, 'Password doesn`t match'
-    end
-    if @new_password != @new_password_confirmation
-      raise ServiceError, 'New password doesn`t match'
-    end
+    raise ServiceError, 'Password doesn`t match' if coach_db_password != @old_password
+
+    raise ServiceError, 'New password doesn`t match' if @new_password != @new_password_confirmation
   end
 
   def update_password

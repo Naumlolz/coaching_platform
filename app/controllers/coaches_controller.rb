@@ -3,8 +3,7 @@ class CoachesController < ApplicationController
     redirect_to coaches_finish_profile_path if current_coach.age.blank?
   end
 
-  def finish_profile
-  end
+  def finish_profile; end
 
   def finish_coach_profile
     coach = current_coach
@@ -14,16 +13,15 @@ class CoachesController < ApplicationController
       description: params[:description],
       education: params[:education],
       experience: params[:experience],
-      certificate: params[:certificate],
+      certificate: params[:certificate]
     )
     redirect_to coaches_dashboard_path
   end
 
-  def profile
-  end
+  def profile; end
 
   def update_expertise
-    coaches_programs_ids = params[:coach][:program_ids].reject {|c| c.empty? }
+    coaches_programs_ids = params[:coach][:program_ids].reject(&:empty?)
     service = Coaches::UpdateExpertiseService.new(
       coach_id: current_coach.id, program_ids: coaches_programs_ids
     )
@@ -50,8 +48,7 @@ class CoachesController < ApplicationController
     )
   end
 
-  def change_password
-  end
+  def change_password; end
 
   def update_password
     service = Coaches::UpdatePasswordService.new(
