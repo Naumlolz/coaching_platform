@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
   validates :password, presence: true, confirmation: true
-  validates :email, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true,
+    format: { with: URI::MailTo::EMAIL_REGEXP }
 
   belongs_to :coach, optional: true
   belongs_to :program, optional: true
