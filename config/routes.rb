@@ -64,4 +64,14 @@ Rails.application.routes.draw do
       post 'update_expertise'
     end
   end
+
+  resources :users do
+    collection do
+      get 'forget_password'
+    end
+  end
+
+  namespace :passwords do
+    resource :send_code, only: [:create, :show]
+  end
 end

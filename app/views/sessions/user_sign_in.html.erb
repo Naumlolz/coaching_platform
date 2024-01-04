@@ -1,4 +1,4 @@
-<h1>Sign into your account</h1>
+<h3>Sign into your account</h3>
 <%= form_with url: users_sign_in_path, method: :post do |f|%>
   <% if @errors.present? %>
     <div class="alert alert-danger" role="alert">
@@ -7,12 +7,13 @@
   <% end %>
 
   <div class="form-group">
-    <label for="email">Email address</label>
+    <label for="email">Email address:</label>
     <%= f.text_field :email, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label for="password">Password</label>
+    <label for="password">Password:</label>
     <%= f.password_field :password, class: 'form-control' %>
+    <%= link_to 'Forgot password?', forget_password_users_path, class: 'float-right'%>
   </div>
 
   <%= f.submit 'Sign ip', class: 'btn btn-primary'%>
