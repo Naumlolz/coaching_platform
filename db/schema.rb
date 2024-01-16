@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_01_100105) do
+ActiveRecord::Schema.define(version: 2024_01_15_063708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,8 +152,8 @@ ActiveRecord::Schema.define(version: 2023_11_01_100105) do
     t.string "password", null: false
     t.bigint "coach_id"
     t.bigint "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "reset_password_code"
     t.datetime "reset_password_code_sent_at"
     t.index ["coach_id"], name: "index_users_on_coach_id"

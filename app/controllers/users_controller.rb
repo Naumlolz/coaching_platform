@@ -17,7 +17,9 @@ class UsersController < ApplicationController
     redirect_to users_dashboard_path
   end
 
-  def forget_password; end
+  def forget_password
+
+  end
 
   def profile; end
 
