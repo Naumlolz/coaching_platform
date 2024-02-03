@@ -1,12 +1,14 @@
-class Passwords::SendCodeService
-  attr_reader :email
+# frozen_string_literal: true
 
+# class for sending 6-digit code to users email
+class Passwords::SendCodeService
   def initialize(params)
     @email = params[:email]
   end
 
   def perform
     check_not_nil_input
+    remove_spaces
     check_email_input
     check_email_exists_in_db
     send_mail
@@ -14,8 +16,14 @@ class Passwords::SendCodeService
 
   private
 
+  attr_reader :email
+
   def check_not_nil_input
-    raise ServiceError, "Can`t be blank" if email.blank?
+    raise ServiceError, 'Cant be blank' if email.blank?
+  end
+
+  def remove_spaces
+    email.strip!
   end
 
   def check_email_input
