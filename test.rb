@@ -253,3 +253,222 @@ end
 def positive_sum(arr)
   arr.filter(&:positive?).sum
 end
+
+def count_sheeps(array)
+  array.count(true)
+end
+
+def nb_dig(num, digit)
+  (0..num).to_a.map { |e| e**2 }.map(&:to_s).join.count(digit.to_s)
+end
+
+def bin_to_dec(str)
+  str.to_i(2)
+end
+
+def replace(str)
+  str.tr('aeiouAEIOU', '!')
+end
+
+# rubocop:disable Metrics/MethodLength
+
+def calculate_years(principal, interest, tax, desired)
+  years = 0
+  if desired > principal
+    while principal <= desired
+      income = principal * interest
+      principal += income - (income * tax)
+      years += 1
+    end
+    years
+  else
+    0
+  end
+end
+
+def human_years_cat_years_dog_years(human_years)
+  dog_years = 0
+  cat_years = 0
+  case human_years
+  when 1
+    dog_years = 15
+    cat_years = 15
+  when 2
+    dog_years = 24
+    cat_years = 24
+  else
+    dog_years = 24 + (5 * (human_years - 2))
+    cat_years = 24 + (4 * (human_years - 2))
+  end
+  [human_years, cat_years, dog_years]
+end
+
+def check_exam(arr1, arr2)
+  result = 0
+  arr1.zip(arr2).each do |el|
+    if el[0].empty? || el[1].empty?
+      result += 0
+    elsif el[0] == el[1]
+      result += 4
+    else
+      result -= 1
+    end
+  end
+
+  result.negative? ? 0 : result
+end
+
+def capitalize(str)
+  str1 = ''
+  str2 = ''
+
+  chr = str.chars
+  chr.each_with_index do |el, idx|
+    if idx.even?
+      str1 << el.upcase
+      str2 << el
+    else
+      str2 << el.upcase
+      str1 << el
+    end
+  end
+
+  [str1, str2]
+end
+
+def get_grade(sc1, sc2, sc3)
+  aver = (sc1 + sc2 + sc3) / 3
+  if aver >= 90
+    'A'
+  elsif aver.between?(80, 89)
+    'B'
+  elsif aver.between?(70, 79)
+    'C'
+  elsif aver.between?(60, 69)
+    'D'
+  else
+    'F'
+  end
+end
+
+# rubocop:enable Metrics/MethodLength
+
+def merge_arrays(arr1, arr2)
+  (arr1 + arr2).uniq.sort
+end
+
+def xor(el1, el2)
+  el1 != el2
+end
+
+def solve(str)
+  lowers = str.count(('a'..'z').to_a.join)
+  uppers = str.count(('A'..'Z').to_a.join)
+
+  uppers > lowers ? str.upcase : str.downcase
+end
+
+def encode(str)
+  str.tr('aeiou', '12345')
+end
+
+def decode(str)
+  str.tr('12345', 'aeiou')
+end
+
+def get_sum(int1, int2)
+  int2 < int1 ? (int2..int1).to_a.sum : (int1..int2).to_a.sum
+end
+
+def solve_arr(arr)
+  arr.reverse.uniq.reverse
+end
+
+def plural(num)
+  num != 1
+end
+
+def add_length(str)
+  str.split.map { |el| "#{el} #{el.length}" }
+end
+
+def first_non_consecutive(arr)
+  arr.each_cons(2) do |el|
+    return el[1] if el[1] - el[0] != 1
+  end
+end
+
+def comp(array1, array2)
+  if array1.nil? || array2.nil?
+    false
+  else
+    c = array1.sort.zip(array2.sort)
+    d = c.collect { |e| e[1] == e[0]**2 }
+    d.all?(true)
+  end
+end
+
+def open_or_senior(data)
+  data.map { |el| el[0] >= 55 && el[1] > 7 ? 'Senior' : 'Open' }
+end
+
+def high_and_low(numbers)
+  numbers.split(' ').map(&:to_i).minmax.reverse.join(' ')
+end
+
+def multi_table(number)
+  initial = 1
+  result = ''
+  10.times do |_|
+    result += "#{initial} * #{number} = #{initial * number}\n"
+    initial += 1
+  end
+  result.chomp
+end
+
+def multi_table2(number)
+  (1..10).map { |initial| "#{initial} * #{number} = #{initial * number}" }.join("\n")
+end
+
+def row_weights(array)
+  sum_even = 0
+  sum_odd = 0
+  array.each.with_index { |el, idx| idx.even? ? sum_even += el : sum_odd += el }
+
+  [sum_even, sum_odd]
+end
+
+def row_weights2(arr)
+  arr.partition.with_index { |_, idx| idx.even? }.map(&:sum)
+end
+
+def find_average(nums)
+  nums.sum.fdiv(nums.size)
+end
+
+def solution(nums)
+  nums.nil? ? [] : nums.sort
+end
+
+def small_enough(arr, limit)
+  arr.collect { |el| el <= limit }.all?(true)
+end
+
+def words_to_marks(string)
+  a = ('a'..'z')
+  b = (1..26)
+  sum = 0
+  c = a.to_a.zip(b.to_a).to_h
+  string.chars.each do |el|
+    sum += c[el]
+  end
+  sum
+end
+
+def min_value(digits)
+  number = ''
+  uniq_digits = digits.uniq
+  number << uniq_digits.delete(uniq_digits.min).to_s until uniq_digits.empty?
+
+  number.to_i
+end

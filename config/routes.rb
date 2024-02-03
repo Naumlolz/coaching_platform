@@ -73,5 +73,6 @@ Rails.application.routes.draw do
 
   namespace :passwords do
     resource :send_code, only: [:create, :show]
+    resource :set_new_password, only: [:create, :show]
   end
 end

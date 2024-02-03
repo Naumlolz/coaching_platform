@@ -1,14 +1,19 @@
 class Passwords::SendCodesController < ApplicationController
   def create
-  end
+    @email = params[:email]
 
-  def show
     Passwords::SendCodeService.new(
       email: params[:email]
     ).perform
     flash[:success] = 'Code has been sent on your email'
-  rescue ServiceError => e
-    flash.now[:error] = e.message
-    render 'users/forget_password'
+    redirect_to passwords_send_code_path(email: @email)
+    rescue ServiceError => e
+      flash.now[:error] = e.message
+      render 'users/forget_password'
+  end
+
+  def show
+    byebug
+    @email = params[:email]
   end
 end
