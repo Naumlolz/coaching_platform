@@ -9,13 +9,9 @@ class Passwords::SendCodesController < ApplicationController
       email: params[:email]
     ).perform
     flash[:success] = 'Code has been sent on your email'
-    redirect_to passwords_send_code_path(email: @email)
+    redirect_to passwords_validate_code_path(email: @email)
   rescue ServiceError => e
     flash.now[:error] = e.message
     render 'users/forget_password'
-  end
-
-  def show
-    @email = params[:email]
   end
 end

@@ -472,3 +472,53 @@ def min_value(digits)
 
   number.to_i
 end
+
+def sequence_sum(begin_number, end_number, step)
+  begin_number <= end_number ? (begin_number..end_number).step(step).to_a.sum : 0
+end
+
+def even_numbers(arr, num)
+  arr.select(&:even?).last(num)
+end
+
+def sum_of_differences(arr)
+  sum = 0
+  arr.sort.each_cons(2) do |el|
+    sum += (el[0] - el[1])
+  end
+  sum.abs
+end
+
+def find_uniq(arr)
+  arr.tally.key(1)
+end
+
+def predict_age(*ages)
+  (Math.sqrt(ages.collect { |e| e * e }.reduce(:+)) / 2).floor
+end
+
+def mxdiflg(arr1, arr2)
+  if arr1.empty? || arr2.empty?
+    -1
+  else
+    max_diff_first_arr = (arr1.collect(&:size).min - arr2.collect(&:size).max).abs
+    max_diff_scnd_arr = (arr2.collect(&:size).min - arr1.collect(&:size).max).abs
+    [max_diff_first_arr, max_diff_scnd_arr].max
+  end
+end
+
+def bump(arg)
+  arg.count('n') <= 15 ? 'Woohoo!' : 'Car Dead'
+end
+
+def adjacent_element_product(array)
+  array.each_cons(2).map { |e| e[0] * e[1] }.max
+end
+
+def generate_shape(num)
+  res = ''
+  num.times do
+    res << "#{'+' * num}\n"
+  end
+  res.chomp
+end
