@@ -522,3 +522,41 @@ def generate_shape(num)
   end
   res.chomp
 end
+
+def sum_cubes(num)
+  (1..num).reduce { |sum, n| sum + n**3 }
+end
+
+def vowel_indices(word)
+  indexes = []
+
+  word.downcase.chars.each_with_index do |el, idx|
+    indexes << idx + 1 if 'aeuioy'.include?(el)
+  end
+
+  indexes
+end
+
+def factorial(num)
+  num.zero? ? 1 : (1..num).reduce(:*)
+end
+
+def vert_mirror(strng)
+  strng.split("\n").map(&:reverse).join("\n")
+end
+
+def hor_mirror(strng)
+  strng.split("\n").reverse.join("\n")
+end
+
+def oper(fct, str)
+  fct.call(str)
+end
+
+# def sorted_and_how?(arr)
+#   arr == arr.sort ? 'yes, ascending' : arr == arr.sort.reverse ? 'yes, descending' : 'no'
+# end
+
+def sum_of_minimums(numbers)
+  numbers.collect(&:min).sum
+end

@@ -1,1 +1,13 @@
-<h1>Hello SET NEW PASSWORD</h1>
+<%= form_with url: passwords_set_new_password_path, method: :post do |f|%>
+  <div class="form-group">
+    <label for="password">New password</label>
+    <%= f.password_field :new_password, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Confirm new password</label>
+    <%= f.password_field :new_password_confirmation, class: 'form-control' %>
+  </div>
+  <%= hidden_field_tag 'email', @email %>
+  <%= f.submit 'Submit', class: 'btn btn-primary'%>
+<% end %>

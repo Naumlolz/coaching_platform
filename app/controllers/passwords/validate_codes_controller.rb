@@ -8,7 +8,7 @@ class Passwords::ValidateCodesController < ApplicationController
       otp_code: params[:otp_code],
       email: params[:email]
     ).perform
-    redirect_to passwords_set_new_password_path
+    redirect_to passwords_set_new_password_path(email: @email)
   rescue ServiceError => e
     flash.now[:error] = e.message
     render 'passwords/validate_codes/show'
