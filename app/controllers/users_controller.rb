@@ -42,11 +42,12 @@ class UsersController < ApplicationController
   def change_password; end
 
   def update_password
-    service = Users::UpdatePasswordService.new(
-      current_user, params[:old_password], params[:new_password],
-      params[:new_password_confirmation]
-    )
-    service.call
+    Users::UpdatePasswordService.new(
+      user: current_user,
+      old_password: params[:old_password],
+      new_password: params[:new_password],
+      new_password_confirmation: params[:new_password_confirmation]
+    ).call
     redirect_to users_dashboard_path
   rescue ServiceError => e
     flash.now[:error] = e.message
