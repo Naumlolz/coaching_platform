@@ -560,3 +560,19 @@ end
 def sum_of_minimums(numbers)
   numbers.collect(&:min).sum
 end
+
+def repeats_my_version(arr)
+  arr.tally.to_a.filter { |e| e[1] == 1 }.flatten.filter { |e| e != 1 }.sum
+end
+
+def repeats(arr)
+  arr.tally.select { |_, v| v == 1 }.sum(&:first)
+end
+
+def product_array(numbers)
+  result = []
+  numbers.combination(numbers.size - 1) do |number|
+    result << number.reduce(:*)
+  end
+  result.reverse
+end
