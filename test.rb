@@ -576,3 +576,38 @@ def product_array(numbers)
   end
   result.reverse
 end
+
+def odd_ones_out(numbers)
+  numbers.filter { |e| numbers.count(e).even? }
+end
+
+def sum_triangular_numbers(num)
+  sum = 0
+  (1..num).to_a.each do |e|
+    sum += (1..e).to_a.sum
+  end
+  sum
+end
+
+def sum_triangular_numbers_v2(num)
+  (1..num).reduce(0) do |sum, e|
+    sum + (e * (e + 1)) / 2
+  end
+end
+
+def remove(str)
+  str.delete_suffix!('!') while str[-1] == '!'
+
+  str
+end
+
+def duplicate_count(text)
+  text.downcase.chars.tally.filter { |_, v| v != 1 }.keys.count
+end
+
+def round_to_next5(num)
+  return num if (num % 5).zero?
+
+  rounded = num.round(-1)
+  rounded > num ? rounded : rounded + 5
+end
