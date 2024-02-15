@@ -611,3 +611,26 @@ def round_to_next5(num)
   rounded = num.round(-1)
   rounded > num ? rounded : rounded + 5
 end
+
+def tower_combinations(size)
+  (1..size).reduce(1, :*)
+end
+
+def usdcny(usd)
+  number = usd * 6.75
+  "#{format('%.2f', number)} Chinese Yuan"
+end
+
+def count_correct_characters(correct, guess)
+  raise 'This is an exception' if correct.size != guess.size
+
+  correct.chars.zip(guess.chars).count { |c, g| c == g }
+end
+
+def validate_number(string)
+  string.delete('-').match?(/^(?:\+44|0)7\d{9}$/) ? 'In with a chance' : 'Plenty more fish in the sea'
+end
+
+def anagram?(test, original)
+  test.downcase.chars.sort.join == original.downcase.chars.sort.join
+end
