@@ -634,3 +634,15 @@ end
 def anagram?(test, original)
   test.downcase.chars.sort.join == original.downcase.chars.sort.join
 end
+
+def count_red_beads(num)
+  if num < 2
+    0
+  else
+    2 * (num - 1)
+  end
+end
+
+def vow?(arr)
+  arr.map { |o| 'aeoiu'.include?(o.chr) ? o.chr : o }
+end
