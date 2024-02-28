@@ -646,3 +646,69 @@ end
 def vow?(arr)
   arr.map { |o| 'aeoiu'.include?(o.chr) ? o.chr : o }
 end
+
+def hydrate(str)
+  total_glasses = str.scan(/\d/).map(&:to_i).sum
+  glass_or_glasses = total_glasses == 1 ? 'glass' : 'glasses'
+  "#{total_glasses} #{glass_or_glasses} of water"
+end
+
+def all_possibilities?(arr)
+  return false if arr == []
+
+  sorted = arr.sort
+  (0..sorted.last).to_a == sorted
+end
+
+def find_longest(arr)
+  arr.map(&:to_s).max_by(&:length).to_i
+end
+
+def cube_checker(volume, side)
+  return false if (volume.zero? || side.zero?) || (volume.negative? || side.negative?)
+
+  side**3 == volume
+end
+
+def alphabet_war(fight)
+  left_side = fight.tr('wpbs', '4321').chars.map(&:to_i).sum
+  right_side = fight.tr('mqdz', '4321').chars.map(&:to_i).sum
+
+  if left_side > right_side
+    'Left side wins!'
+  elsif right_side > left_side
+    'Right side wins!'
+  else
+    "Let's fight again!"
+  end
+end
+
+def abbrev_name(name)
+  name.split.map { |word| word[0].capitalize }.join('.')
+end
+
+def how_much_i_love_you(nb_petals)
+  petals = {
+    1 => 'I love you',
+    2 => 'a little',
+    3 => 'a lot',
+    4 => 'passionately',
+    5 => 'madly',
+    0 => 'not at all'
+  }
+
+  result = nb_petals % 6
+  petals[result]
+end
+
+def contamination(text, char)
+  return '' if text.empty? || char.empty?
+
+  char * text.size
+end
+
+def sum_mul(num, mun)
+  return 'INVALID' if (num.negative? || mun.negative?) || (num.zero? || mun.zero?) || (mun < num)
+
+  (num..mun).step(num).sum
+end
