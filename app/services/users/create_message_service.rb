@@ -12,10 +12,12 @@ class Users::CreateMessageService
 
   private
 
+  attr_reader :body, :user_id, :coach_id
+
   def create_message
     @message = Message.create(
-      body: @body, user_id: @user_id,
-      coach_id: @coach_id
+      body: body, user_id: user_id,
+      coach_id: coach_id
     )
   end
 

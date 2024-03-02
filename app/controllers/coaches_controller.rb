@@ -52,8 +52,10 @@ class CoachesController < ApplicationController
 
   def update_password
     service = Coaches::UpdatePasswordService.new(
-      current_coach, params[:old_password], params[:new_password],
-      params[:new_password_confirmation]
+      coach:                     current_coach,
+      old_password:              params[:old_password],
+      new_password:              params[:new_password],
+      new_password_confirmation: params[:new_password_confirmation]
     )
     service.call
     redirect_to coaches_dashboard_path

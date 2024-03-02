@@ -712,3 +712,7 @@ def sum_mul(num, mun)
 
   (num..mun).step(num).sum
 end
+
+def two_sort(str)
+  str.min.chars.join('***')
+end
