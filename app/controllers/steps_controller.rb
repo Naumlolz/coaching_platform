@@ -6,9 +6,9 @@ class StepsController < ApplicationController
 
   def perform_complete
     service = Users::RecordCompletedStepService.new(
-      current_user.id,
-      params[:technique_id],
-      params[:id]
+      user_id:      current_user.id,
+      technique_id: params[:technique_id],
+      step_id:      params[:id]
     )
     next_step_id = service.perform
     if next_step_id.present?
