@@ -60,10 +60,9 @@ class UsersController < ApplicationController
   end
 
   def invite_coach
-    invitation = Users::InviteCoachService.new(
-      current_user, params[:coach_id]
-    )
-    invitation.call
+    Users::InviteCoachService.new(
+      user: current_user, coach_id: params[:coach_id]
+    ).call
     flash[:success] = 'You`ve successfully sent invitation'
     redirect_to users_dashboard_path
   rescue ServiceError => e

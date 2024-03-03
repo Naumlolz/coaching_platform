@@ -9,5 +9,9 @@ FactoryBot.define do
     gender { "male" }
     age { rand(100) }
     coach_id { coach.id }
+
+    trait :without_coach do
+      coach_id { nil }
+    end
   end
 end
