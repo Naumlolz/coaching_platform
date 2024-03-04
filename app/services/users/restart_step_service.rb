@@ -11,13 +11,16 @@ class Users::RestartStepService
 
   private
 
+  attr_reader :user_id, :technique_id
+
   def destroy_steps
     UserCompletedStep.where(
-      user_id: @user_id, technique_id: @technique_id
+      user_id: user_id, technique_id: technique_id
     ).destroy_all
   end
 
   def find_first_step
-    Step.find_by(technique_id: @technique_id, position: 0).id
+    step = Step.find_by(technique_id: technique_id, position: 0)
+    step&.id
   end
 end

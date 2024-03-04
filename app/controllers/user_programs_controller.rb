@@ -6,7 +6,8 @@ class UserProgramsController < ApplicationController
 
   def update
     service = Users::ChooseProgramService.new(
-      current_user, params[:id]
+      user:       current_user,
+      program_id: params[:id]
     )
     service.perform
     flash[:success] = 'The program is chosen'
