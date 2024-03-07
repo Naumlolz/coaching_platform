@@ -11,13 +11,15 @@ class Coaches::UpdateExpertiseService
 
   private
 
+  attr_reader :coach_id
+
   def destroy_expertise
-    CoachesProgram.where(coach_id: @coach_id).destroy_all
+    CoachesProgram.where(coach_id: coach_id).destroy_all
   end
 
   def create_expertise
     @program_ids.each do |program_id|
-      CoachesProgram.create(coach_id: @coach_id, program_id: program_id)
+      CoachesProgram.create(coach_id: coach_id, program_id: program_id)
     end
   end
 end

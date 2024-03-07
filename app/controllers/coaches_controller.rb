@@ -22,10 +22,9 @@ class CoachesController < ApplicationController
 
   def update_expertise
     coaches_programs_ids = params[:coach][:program_ids].reject(&:empty?)
-    service = Coaches::UpdateExpertiseService.new(
+    Coaches::UpdateExpertiseService.new(
       coach_id: current_coach.id, program_ids: coaches_programs_ids
-    )
-    service.perform
+    ).perform
     redirect_to coaches_profile_path
   end
 
