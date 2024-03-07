@@ -73,8 +73,10 @@ class CoachesController < ApplicationController
   end
 
   def accept_invite
-    invite = Coaches::AcceptInviteService.new(current_coach.id, params[:invitation_id])
-    invite.call
+    Coaches::AcceptInviteService.new(
+      coach_id:  current_coach.id,
+      invite_id: params[:invitation_id]
+    ).call
     flash[:success] = 'You`ve assigned user!'
     redirect_to coaches_waiting_for_confirmation_path
   rescue ServiceError => e

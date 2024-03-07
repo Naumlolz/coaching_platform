@@ -1,7 +1,7 @@
 class Coaches::AcceptInviteService
-  def initialize(coach_id, invite_id)
-    @coach_id = coach_id
-    @invite_id = invite_id
+  def initialize(params)
+    @coach_id = params[:coach_id]
+    @invite_id = params[:invite_id]
   end
 
   def call
@@ -12,8 +12,10 @@ class Coaches::AcceptInviteService
 
   private
 
+  attr_reader :coach_id, :invite_id
+
   def find_invitation
-    @found_invite = UsersCoachesInvitation.find_by(id: @invite_id)
+    @found_invite = UsersCoachesInvitation.find_by(id: invite_id)
   end
 
   def update_invitation
@@ -22,7 +24,7 @@ class Coaches::AcceptInviteService
   end
 
   def assign_coach_to_user
-    assign_status = @found_invite.user.update(coach_id: @coach_id)
+    assign_status = @found_invite.user.update(coach_id: coach_id)
     raise ServiceError, 'You cannot assign user' unless assign_status
   end
 end
