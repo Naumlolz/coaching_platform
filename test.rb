@@ -716,3 +716,26 @@ end
 def two_sort(str)
   str.min.chars.join('***')
 end
+
+def bin_str(str)
+  counts = 0
+  while str != '0' * str.size
+    idx = str.index('1')
+    sliced_str = str.slice(idx..-1).tr('10', '01')
+    str = idx.zero? ? sliced_str : str[0...idx] + sliced_str
+    counts += 1
+  end
+  counts
+end
+
+def validate_code(code)
+  /^[1-3]/.match?(code.to_s)
+end
+
+def sort_my_string(str)
+  beginning = ''
+  ending = ''
+  result = ' '
+  str.chars.each_with_index { |e, idx| idx.even? ? beginning << e : ending << e }
+  beginning + result + ending
+end
