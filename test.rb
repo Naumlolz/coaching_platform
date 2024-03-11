@@ -739,3 +739,15 @@ def sort_my_string(str)
   str.chars.each_with_index { |e, idx| idx.even? ? beginning << e : ending << e }
   beginning + result + ending
 end
+
+def find_digit(num, nth)
+  num = num.abs
+  return -1 if nth <= 0
+  return 0 if nth > num.to_s.size
+
+  num.digits[nth - 1]
+end
+
+def power_of_two?(num)
+  num.positive? && (num & (num - 1)).zero?
+end
