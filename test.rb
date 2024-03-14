@@ -751,3 +751,12 @@ end
 def power_of_two?(num)
   num.positive? && (num & (num - 1)).zero?
 end
+
+def men_from_boys(arr)
+  evens, odd = arr.uniq.partition(&:even?)
+  evens.sort + odd.sort.reverse
+end
+
+def tidy_number(num)
+  num.digits.uniq.each_cons(2).all? { |f, s| f > s }
+end
