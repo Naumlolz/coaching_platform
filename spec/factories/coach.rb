@@ -10,5 +10,9 @@ FactoryBot.define do
     education { 'School' }
     experience { 'Arsenal FC' }
     certificate { 'Coach licence' }
+
+    after(:create) do |coach|
+      create_list(:coaches_program, 3, coach: coach)
+    end
   end
 end

@@ -5,11 +5,10 @@ class UserProgramsController < ApplicationController
   end
 
   def update
-    service = Users::ChooseProgramService.new(
+    Users::ChooseProgramService.new(
       user:       current_user,
       program_id: params[:id]
-    )
-    service.perform
+    ).perform
     flash[:success] = 'The program is chosen'
     redirect_to users_dashboard_path
   rescue ServiceError => e
