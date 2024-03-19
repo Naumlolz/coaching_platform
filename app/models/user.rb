@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
   validates :password, presence: true, confirmation: true
+  # validates :age, numericality: { greater_than_or_equal_to: 5, less_than_or_equal_to: 99 }
   validates :email, uniqueness: true, presence: true,
     format: { with: URI::MailTo::EMAIL_REGEXP }
 

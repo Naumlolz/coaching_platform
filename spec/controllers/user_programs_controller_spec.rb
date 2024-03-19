@@ -16,11 +16,6 @@ RSpec.describe UserProgramsController, type: :controller do
 
   subject { Users::ChooseProgramService.new(controller_params) }
 
-  # let(:coaches_program_1) { create(:coaches_program,
-  #                                   coach_id: coach_1.id,
-  #                                   program_id: program_1.id
-  #                                 ) }
-
   describe 'GET #index' do
     it 'renders coaches programs and current chosen program' do
       get :index

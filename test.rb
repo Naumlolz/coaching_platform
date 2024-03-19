@@ -760,3 +760,7 @@ end
 def tidy_number(num)
   num.digits.uniq.each_cons(2).all? { |f, s| f > s }
 end
+
+def largest_pair_sum(numbers)
+  numbers.sort.each_cons(2).map(&:sum).max
+end
