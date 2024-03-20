@@ -764,3 +764,37 @@ end
 def largest_pair_sum(numbers)
   numbers.sort.each_cons(2).map(&:sum).max
 end
+
+def ordered_count(str)
+  str.chars.tally.map(&:to_a)
+end
+
+def last(str)
+  str.split.sort_by { |word| word[-1] }
+end
+
+def outed(meet, boss)
+  meet[boss.to_sym] <= 5 ? 'Get Out Now!' : 'Nice Work Champ!'
+end
+
+# def unique_in_order(iterable)
+#   iterable.empty? ? [] :
+#     iterable.is_a?(Array) ? iterable.uniq! : iterable.squeeze.chars
+# end
+
+def unique_in_order(iterable)
+  return [] if iterable.empty?
+
+  iterable.is_a?(Array) ? iterable.uniq : iterable.squeeze.chars
+end
+
+# def solver(str)
+#   matchers = []
+#   result = [/[A-Z]/, /[a-z]/, /[0-9]/, /[^a-zA-Z0-9]/]
+#   result.each { |matcher| matchers << str.scan(matcher).size }
+#   matchers
+# end
+
+def solver(str)
+  [/[A-Z]/, /[a-z]/, /[0-9]/, /[^a-zA-Z0-9]/].map { |matcher| str.scan(matcher).size }
+end
