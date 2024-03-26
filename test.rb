@@ -798,3 +798,79 @@ end
 def solver(str)
   [/[A-Z]/, /[a-z]/, /[0-9]/, /[^a-zA-Z0-9]/].map { |matcher| str.scan(matcher).size }
 end
+
+# def high(str)
+#   position_points = ('a'..'z').zip(1..26).to_h
+#   splitted_str = str.split
+#   res = []
+#   splitted_str.each do |word|
+#     temp_res = []
+#     word.chars.each do |char|
+#       temp_res << position_points[char]
+#     end
+#     res << temp_res.sum
+#   end
+#   result = splitted_str.zip(res).to_h
+#   result.key(result.values.max)
+# end
+
+def high(str)
+  alphabet = ('a'..'z').to_a
+  scores = str.split.map do |word|
+    word.chars.sum { |char| alphabet.index(char) + 1 }
+  end
+  str.split[scores.index(scores.max)]
+end
+
+def sort_array(source_array)
+  odd_numbers = source_array.select(&:odd?).sort
+  source_array.map { |num| num.odd? ? odd_numbers.shift : num }
+end
+
+# def persistence(num)
+#   return 0 if num.digits.size == 1
+
+#   counts = 0
+
+#   while num.digits.size != 1
+#     num = num.digits.inject(:*)
+#     counts += 1
+#   end
+
+#   counts
+# end
+
+def persistence(num)
+  return 0 if num < 10
+
+  count = 0
+  loop do
+    num = num.digits.reduce(:*)
+    count += 1
+    break unless num > 9
+  end
+  count
+end
+
+def shorten_to_date(long_date)
+  long_date.sub(/,.*$/, '')
+end
+
+# def expanded_form(num, base: 10)
+#   res = num.to_s.reverse.each_char.with_index.map do |character, index|
+#     base**index * character.to_i
+#   end.reverse
+
+#   res.delete(0)
+#   res.join(' + ')
+# end
+
+def expanded_form(num, base: 10)
+  num.to_s
+     .reverse
+     .chars
+     .map.with_index { |character, index| base**index * character.to_i }
+     .reverse
+     .reject(&:zero?)
+     .join(' + ')
+end
