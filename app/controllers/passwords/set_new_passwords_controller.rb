@@ -2,6 +2,10 @@
 
 # class for setting up new users password
 class Passwords::SetNewPasswordsController < ApplicationController
+  def show
+    @email = params[:email]
+  end
+
   def create
     @email = params[:email]
 
@@ -15,9 +19,5 @@ class Passwords::SetNewPasswordsController < ApplicationController
   rescue ServiceError => e
     flash.now[:error] = e.message
     render 'passwords/set_new_passwords/show'
-  end
-
-  def show
-    @email = params[:email]
   end
 end

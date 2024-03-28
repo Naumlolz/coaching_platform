@@ -2,6 +2,10 @@
 
 # class for validating 6-digit code according to users email
 class Passwords::ValidateCodesController < ApplicationController
+  def show
+    @email = params[:email]
+  end
+
   def create
     @email = params[:email]
     Passwords::ValidateCodeService.new(
@@ -12,9 +16,5 @@ class Passwords::ValidateCodesController < ApplicationController
   rescue ServiceError => e
     flash.now[:error] = e.message
     render 'passwords/validate_codes/show'
-  end
-
-  def show
-    @email = params[:email]
   end
 end
