@@ -351,6 +351,21 @@ def get_grade(sc1, sc2, sc3)
   end
 end
 
+def likes(names)
+  return 'no one likes this' if names.empty?
+
+  case names.size
+  when 1
+    "#{names[0]} likes this"
+  when 2
+    "#{names[0]} and #{names[1]} like this"
+  when 3
+    "#{names[0]}, #{names[1]} and #{names[2]} like this"
+  else
+    "#{names[0]}, #{names[1]} and #{names.size - 2} others like this"
+  end
+end
+
 # rubocop:enable Metrics/MethodLength
 
 def merge_arrays(arr1, arr2)
@@ -873,4 +888,24 @@ def expanded_form(num, base: 10)
      .reverse
      .reject(&:zero?)
      .join(' + ')
+end
+
+def max_product(numbers, size)
+  numbers.sort.reverse.first(size).reduce(:*)
+end
+
+def count_chars(str)
+  str.chars.tally
+end
+
+# def filter_string(string)
+#   string.chars.filter { |e| e.match?(/[0-9]/) }.join.to_i
+# end
+
+def filter_string(string)
+  string.scan(/\d/).join.to_i
+end
+
+def explode(str)
+  str.chars.map { |e| e * e.to_i }.join
 end

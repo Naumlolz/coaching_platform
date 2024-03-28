@@ -31,11 +31,11 @@ class SessionsController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
     service.perform
-    flash[:success] = "Thank you for singup! Now you can sign in!"
+    flash[:success] = 'Thank you for signup! Now you can sign in!'
     redirect_to users_sign_in_path
   rescue ServiceError => e
     flash[:error] = e.message
-    render "user_sign_up"
+    render 'user_sign_up'
   end
 
   def coach_sign_in; end
@@ -64,11 +64,11 @@ class SessionsController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
     service.perform
-    flash[:success] = 'Thank you for singup! Now you can sign in!'
+    flash[:success] = 'Thank you for signup! Now you can sign in!'
     redirect_to coaches_sign_in_path
   rescue ServiceError => e
     flash[:error] = e.message
-    render "coach_sign_up"
+    render 'coach_sign_up'
   end
 
   def sign_out
