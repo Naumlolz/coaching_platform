@@ -909,3 +909,42 @@ end
 def explode(str)
   str.chars.map { |e| e * e.to_i }.join
 end
+
+def define_suit(card)
+  hash = {
+    'C': 'clubs',
+    'D': 'diamonds',
+    'S': 'spades',
+    'H': 'hearts'
+  }
+
+  hash[card[-1].to_sym]
+end
+
+def calc(str)
+  total1 = str.chars.map(&:ord).join
+  total2 = total1.tr('7', '1')
+  total1.to_i.digits.sum - total2.to_i.digits.sum
+end
+
+# def vaporcode(string)
+#   string.delete(' ').chars.map(&:upcase).join('  ')
+# end
+
+def vaporcode(string)
+  string.upcase.gsub(/\s/, '').split('').join('  ')
+end
+
+def find_smallest(numbers, to_return)
+  to_return == 'value' ? numbers.min : numbers.index(numbers.min)
+end
+
+def div_con(arr)
+  num, strings = arr.partition { |e| e.is_a?(Integer) }
+  integers_strings = strings.map(&:to_i)
+  num.sum - integers_strings.sum
+end
+
+def capitalized(str, ind)
+  str.chars.map.with_index { |e, idx| ind.include?(idx) ? e.upcase : e }.join
+end
