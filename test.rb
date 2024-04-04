@@ -948,3 +948,27 @@ end
 def capitalized(str, ind)
   str.chars.map.with_index { |e, idx| ind.include?(idx) ? e.upcase : e }.join
 end
+
+def invert(list)
+  list.map { |e| e.positive? ? e * -1 : e.abs }
+end
+
+def fold_to(distance)
+  thickness = 0.0001
+  counter = 0
+
+  return nil if distance.negative?
+
+  until thickness >= distance
+    thickness *= 2
+    counter += 1
+  end
+
+  counter
+end
+
+def cube_odd(arr)
+  return nil if arr.any? { |e| !e.is_a?(Integer) }
+
+  arr.filter(&:odd?).map { |e| e**3 }.sum
+end
