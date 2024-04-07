@@ -972,3 +972,35 @@ def cube_odd(arr)
 
   arr.filter(&:odd?).map { |e| e**3 }.sum
 end
+
+def billboard(name, price = 30)
+  cost = 0
+  name.size.times do
+    cost += price
+  end
+  cost
+end
+
+# def strong_num(num)
+#   num == num.digits.map { |e| (1..e).reduce(:*) }.map { |e| e.nil? ? 1 : e }.sum ? 'STRONG!!!!' : 'Not Strong !!'
+# end
+
+def strong_num(num)
+  factorial_sum = num.digits.map { |digit| (1..digit).reduce(1, :*) }.sum
+  factorial_sum == num ? 'STRONG!!!!' : 'Not Strong !!'
+end
+
+# def multiplication_table(size)
+#   b = (1..size).to_a
+#   c = []
+
+#   b.map do |e|
+#     c.push((e..e * size).step(e).to_a)
+#   end
+
+#   c
+# end
+
+def multiplication_table(size)
+  (1..size).map { |e| (1..size).map { |i| e * i } }
+end

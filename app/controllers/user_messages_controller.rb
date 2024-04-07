@@ -9,12 +9,30 @@ class UserMessagesController < ApplicationController
       body: params[:body], user_id: current_user.id,
       coach_id: coach.id
     )
-    service.perform
-    redirect_to user_messages_path(user_id: params[:user_id])
-    # SendUserMessageJob.perform_later(service)
+    message = service.perform
+    serialized_message = serialize_message(message)
+
+    ActionCable.server.broadcast 'messages_channel', serialized_message
+    head :no_content
+
+    # redirect_to user_messages_path(user_id: params[:user_id])
   rescue ServiceError => e
     flash.now[:error] = e.message
     user_messages_path
-    # SendUserMessageJob.perform_later(service)
+  end
+
+  private
+
+  def serialize_message(message)
+    return nil unless message
+
+    {
+      id: message.id,
+      body: message.body,
+      sent_by_coach: message.sent_by_coach,
+      user_id: message.user_id,
+      coach_id: message.coach_id,
+      created_at: message.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    }
   end
 end

@@ -8,6 +8,7 @@ class Users::CreateMessageService
   def perform
     create_message
     message_validation
+    @message
   end
 
   private

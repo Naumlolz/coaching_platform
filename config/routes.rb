@@ -76,4 +76,6 @@ Rails.application.routes.draw do
     resource :validate_code, only: [:create, :show]
     resource :set_new_password, only: [:create, :show]
   end
+
+  mount ActionCable.server => '/cable'
 end

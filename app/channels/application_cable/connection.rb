@@ -9,16 +9,17 @@ module ApplicationCable
     private
 
     def find_verified_person
-      person = request.params[:person]
-      current_person = if person == 'user'
-                         User.find_by(id: cookies.encrypted['session']['member_id'])
-                       elsif person == 'coach'
-                         Coach.find_by(id: cookies.encrypted['session']['member_id'])
+      person = cookies.encrypted["_coaching_platform_session"]['member_type']
+      current_person = if person == 'User'
+                         User.find_by(id: cookies.encrypted["_coaching_platform_session"]['member_id'])
+                       elsif person == 'Coach'
+                         Coach.find_by(id: cookies.encrypted["_coaching_platform_session"]['member_id'])
                        end
       if current_person.blank?
         reject_unauthorized_connection
       else
         current_person
+      end
     end
   end
 end

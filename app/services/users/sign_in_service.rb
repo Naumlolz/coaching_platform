@@ -8,6 +8,7 @@ class Users::SignInService
     @email = params[:email]
     @password = params[:password]
     @session = params[:session]
+    @cookies = params[:cookies]
   end
 
   def perform
@@ -19,7 +20,7 @@ class Users::SignInService
 
   private
 
-  attr_reader :email, :password, :session
+  attr_reader :email, :password, :session, :cookies
 
   def fetch_user
     User.find_by(email: email)
@@ -37,6 +38,7 @@ class Users::SignInService
     if hashed_password == password
       session[:member_type] = 'User'
       session[:member_id] = fetch_user.id
+      cookies[:user_id] = fetch_user.id
     end
   end
 
