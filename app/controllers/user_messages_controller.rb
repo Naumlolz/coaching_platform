@@ -10,10 +10,15 @@ class UserMessagesController < ApplicationController
       coach_id: coach.id
     )
     message = service.perform
+    @message = message
     serialized_message = serialize_message(message)
 
     ActionCable.server.broadcast 'messages_channel', serialized_message
     head :no_content
+
+    respond_to do |format|
+      format.js { @message }
+    end
 
     # redirect_to user_messages_path(user_id: params[:user_id])
   rescue ServiceError => e

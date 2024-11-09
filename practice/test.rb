@@ -1004,3 +1004,15 @@ end
 def multiplication_table(size)
   (1..size).map { |e| (1..size).map { |i| e * i } }
 end
+
+# def solution2(value)
+#   "Value is #{value.to_s.rjust(5, '0')}"
+# end
+
+def solution2(value)
+  format('Value is %05d', value)
+end
+
+def validate_usr(username)
+  /^[a-z0-9_]{4,16}$/.match?(username)
+end

@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
     Users::SignInService.new(
       email:    params[:email],
       password: params[:password],
-      session:  session,
-      cookies: cookies
+      session:  session
     ).perform
     flash[:success] = 'Sign in is successfull!'
     redirect_to users_dashboard_path

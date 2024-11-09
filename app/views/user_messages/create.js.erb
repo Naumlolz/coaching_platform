@@ -1,0 +1,4 @@
+var messagesContainer = document.getElementById('messages');
+var messageContent = "<p><%= j @message.body %></p>";
+var messageContainer = "<div class='container-<%= @message.sent_by_coach ? 'coach' : 'user' %>'>" + messageContent + "</div>";
+messagesContainer.insertAdjacentHTML('beforeend', messageContainer);
