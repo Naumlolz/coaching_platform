@@ -37,7 +37,7 @@ class UserMessagesController < ApplicationController
       sent_by_coach: message.sent_by_coach,
       user_id: message.user_id,
       coach_id: message.coach_id,
-      created_at: message.created_at.strftime("%Y-%m-%d %H:%M:%S")
+      created_at: message.created_at.strftime('%Y-%m-%d %H:%M:%S')
     }
   end
 end

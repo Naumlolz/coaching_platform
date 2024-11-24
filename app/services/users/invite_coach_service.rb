@@ -25,12 +25,12 @@ class Users::InviteCoachService
       user_id: user.id,
       accepted: nil
     ).count
-    raise ServiceError, "You can`t invite more than 1 coach" if invites_count >= 1
+    raise ServiceError, 'You cant invite more than 1 coach' if invites_count >= 1
   end
 
   def create_invitation
     @invite = UsersCoachesInvitation.create(
-      user_id: user.id, 
+      user_id: user.id,
       coach_id: coach_id
     )
   end

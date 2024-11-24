@@ -17,9 +17,7 @@ class UsersController < ApplicationController
     redirect_to users_dashboard_path
   end
 
-  def forget_password
-
-  end
+  def forget_password; end
 
   def profile; end
 
@@ -27,7 +25,7 @@ class UsersController < ApplicationController
     updated_user = current_user
     updated_user.update(user_params)
     if updated_user.valid?
-      flash[:success] = 'Your profile was updated'
+      flash[:success] = I18n.t('success_messages.profile_updated')
       redirect_to users_profile_path
     else
       @errors = updated_user.errors.full_messages
@@ -63,7 +61,7 @@ class UsersController < ApplicationController
     Users::InviteCoachService.new(
       user: current_user, coach_id: params[:coach_id]
     ).call
-    flash[:success] = 'You`ve successfully sent invitation'
+    flash[:success] = I18n.t('success_messages.invitation_sent')
     redirect_to users_dashboard_path
   rescue ServiceError => e
     flash[:error] = e.message

@@ -29,7 +29,8 @@ class Passwords::SetNewPasswordService
   end
 
   def check_password_inputs
-    raise ServiceError, 'Password confirmation must match password' if new_password.strip != new_password_confirmation.strip
+    raise ServiceError, 'Password confirmation must match password' if
+      new_password.strip != new_password_confirmation.strip
   end
 
   def set_new_password

@@ -1,13 +1,17 @@
 ActiveAdmin.register Technique do
-  permit_params [:name, :description, :program_id]
+  permit_params %i[name description program_id]
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors do
+      f.object.errors.each do |attribute, message|
+        concat content_tag(:li, "#{attribute.to_s.humanize} #{message}")
+      end
+    end
 
     f.inputs 'Technique' do
       f.input :name
       f.input :description
-      f.input :program_id, as: :select, collection: Program.all.pluck(:name, :id)
+      f.input :program_id, as: :select, collection: Program.pluck(:name, :id)
     end
     f.actions
   end

@@ -6,10 +6,10 @@ class UserProgramsController < ApplicationController
 
   def update
     Users::ChooseProgramService.new(
-      user:       current_user,
+      user: current_user,
       program_id: params[:id]
     ).perform
-    flash[:success] = 'The program is chosen'
+    flash[:success] = I18n.t('success_messages.program_chosen')
     redirect_to users_dashboard_path
   rescue ServiceError => e
     flash[:error] = e.message

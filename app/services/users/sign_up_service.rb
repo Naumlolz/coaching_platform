@@ -25,23 +25,19 @@ class Users::SignUpService
 
   def check_user_email
     user_email = User.find_by(email: email)
-    if user_email.present?
-      raise ServiceError, 'This email is already taken'
-    end
+    raise ServiceError, 'This email is already taken' if user_email.present?
   end
 
   def check_password_confirmation
-    if password != password_confirmation
-      raise ServiceError, 'The password doesnt match'
-    end
+    raise ServiceError, 'The password doesnt match' if password != password_confirmation
   end
 
   def create_user
     @user = User.create(
       first_name: first_name,
-      last_name:  last_name,
-      email:      email,
-      password:   password.present? ? Password.create(password) : nil
+      last_name: last_name,
+      email: email,
+      password: password.present? ? Password.create(password) : nil
     )
   end
 
