@@ -1,6 +1,8 @@
 class CoachesController < ApplicationController
   def dashboard
     redirect_to coaches_finish_profile_path if current_coach.age.blank?
+
+    @coach = current_coach
   end
 
   def finish_profile; end
@@ -51,9 +53,9 @@ class CoachesController < ApplicationController
 
   def update_password
     service = Coaches::UpdatePasswordService.new(
-      coach:                     current_coach,
-      old_password:              params[:old_password],
-      new_password:              params[:new_password],
+      coach: current_coach,
+      old_password: params[:old_password],
+      new_password: params[:new_password],
       new_password_confirmation: params[:new_password_confirmation]
     )
     service.call
@@ -73,10 +75,10 @@ class CoachesController < ApplicationController
 
   def accept_invite
     Coaches::AcceptInviteService.new(
-      coach_id:  current_coach.id,
+      coach_id: current_coach.id,
       invite_id: params[:invitation_id]
     ).call
-    flash[:success] = 'You`ve assigned user!'
+    flash[:success] = I18n.t('success_messages.successfull_assigned_user')
     redirect_to coaches_waiting_for_confirmation_path
   rescue ServiceError => e
     flash[:error] = e.message

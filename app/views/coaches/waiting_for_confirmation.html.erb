@@ -10,10 +10,10 @@
         <p class="card-text"><%= invitation.user.description %></p>
         <%= link_to 'Refuse', coaches_decline_invite_path(
           invitation_id: invitation.id
-          ), method: :post, class: 'btn btn-primary' %>
+          ), method: :post, class: 'btn btn-danger' %>
         <%= link_to 'Confirm', coaches_accept_invite_path(
           invitation_id: invitation.id
-          ), method: :post, class: 'btn btn-primary' %>
+          ), method: :post, class: 'btn btn-success' %>
       </div>
     </div>
   <% end %>

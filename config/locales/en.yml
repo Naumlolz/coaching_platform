@@ -5,3 +5,4 @@ en:
     program_chosen: 'The program is chosen'
     successfull_sign_up: 'Thank you for signup! Now you can sign in!'
     successfull_sign_in: 'Sign in is successfull!'
+    successfull_assigned_user: 'You have assigned user!'

@@ -8,6 +8,7 @@ class Coaches::AcceptInviteService
     find_invitation
     update_invitation
     assign_coach_to_user
+    increment_total_users
   end
 
   private
@@ -26,5 +27,11 @@ class Coaches::AcceptInviteService
   def assign_coach_to_user
     assign_status = @found_invite.user.update(coach_id: coach_id)
     raise ServiceError, 'You cannot assign user' unless assign_status
+  end
+
+  def increment_total_users
+    coach = Coach.find(coach_id)
+    coach.total_users_count += 1
+    coach.save!
   end
 end

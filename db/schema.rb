@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_15_063708) do
+ActiveRecord::Schema.define(version: 2024_11_24_072229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2024_01_15_063708) do
     t.string "certificate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "total_users_count", default: 0
     t.index ["email"], name: "index_coaches_on_email", unique: true
   end
 
