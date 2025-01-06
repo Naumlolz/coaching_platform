@@ -6,3 +6,36 @@ body {
   background-color: rgba(243, 228, 242, 0.212);
   text-align: center;
 }
+
+.highlighted {
+  background-color: #f078e0; /* Желтый цвет */
+  color: white;               /* Белый текст */
+  padding: 5px 10px;          /* Внутренний отступ */
+  border-radius: 20px;        /* Радиус скругления углов */
+}
+
+.custom-dropdown::after {
+  display: none; /* Убираем стрелку */
+}
+
+.custom-dropdown::before {
+  content: "\22EE"; /* Добавляем три точки */
+  color: black;
+  font-size: 18px;
+  position: relative;
+  top: -6px;
+  left: 10px;
+}
+
+.custom-dropdown {
+  background-color: transparent !important; /* Делаем фон прозрачным */
+  border: none !important; /* Убираем рамку */
+  padding: 0 !important; /* Уменьшаем отступы */
+  width: auto !important; /* Сужаем ширину до минимально необходимой */
+}
+
+.dropdown-menu-container {
+  position: absolute;
+  top: 15px; /* Отступ сверху */
+  right: 15px; /* Отступ справа */
+}

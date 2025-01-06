@@ -48,14 +48,6 @@
       <li class="nav-item mr-5">
         <%= link_to 'Library', coach_programs_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item mr-3">
-        <span class="navbar-text">
-        Hello, <%= link_to current_coach.first_name, coaches_profile_path %>
-        </span>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Change password', coaches_change_password_path, class: 'nav-link' %>
-      </li>
       <li class="nav-item">
         <%= link_to 'Log out', sign_out_path, class: 'btn btn-danger' %>
       </li>
