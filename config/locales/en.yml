@@ -6,3 +6,8 @@ en:
     successfull_sign_up: 'Thank you for signup! Now you can sign in!'
     successfull_sign_in: 'Sign in is successfull!'
     successfull_assigned_user: 'You have assigned user!'
+  flash:
+    ratings:
+      created: 'Оценка успешно добавлена.'
+      already_rated: 'Вы уже оценили этот элемент.'
+      updated: 'Оценка успешно обновлена.'

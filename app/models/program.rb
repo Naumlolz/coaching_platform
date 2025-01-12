@@ -5,6 +5,7 @@ class Program < ApplicationRecord
   has_many :users, dependent: :nullify
   has_many :coaches_programs, dependent: :destroy
   has_many :coaches, through: :coaches_programs
+  has_many :users_programs_ratings, dependent: :destroy
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at description id name updated_at]

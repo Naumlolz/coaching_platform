@@ -14,7 +14,11 @@ class StepsController < ApplicationController
     if next_step_id.present?
       redirect_to step_path(next_step_id)
     else
-      redirect_to user_techniques_path
+      # redirect_to user_techniques_path
+      @show_modal = true
+      @step = Step.find(params[:id])
+      @current_technique = @step.technique
+      render action: :show
     end
   rescue ServiceError => e
     flash.now[:error] = e.message

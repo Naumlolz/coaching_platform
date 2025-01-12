@@ -47,10 +47,10 @@ Rails.application.routes.draw do
   post '/coaches/decline_invite', to: 'coaches#decline_invite'
 
   resources :user_techniques, only: [:index]
-  resources :user_programs, only: [:index, :update]
+  resources :user_programs, only: %i[index update]
   resources :coach_programs, only: [:index]
-  resources :user_messages, only: [:index, :create]
-  resources :coach_messages, only: [:index, :create]
+  resources :user_messages, only: %i[index create]
+  resources :coach_messages, only: %i[index create]
   resources :steps, only: [:show] do
     member do
       post 'perform_complete'
@@ -73,8 +73,12 @@ Rails.application.routes.draw do
 
   namespace :passwords do
     resource :send_code, only: [:create]
-    resource :validate_code, only: [:create, :show]
-    resource :set_new_password, only: [:create, :show]
+    resource :validate_code, only: %i[create show]
+    resource :set_new_password, only: %i[create show]
+  end
+
+  namespace :users_programs_ratings do
+    resource :rating, only: [:create]
   end
 
   mount ActionCable.server => '/cable'

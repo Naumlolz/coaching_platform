@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_24_072229) do
+ActiveRecord::Schema.define(version: 2025_01_06_150508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,17 @@ ActiveRecord::Schema.define(version: 2024_11_24_072229) do
     t.index ["user_id"], name: "index_users_coaches_invitations_on_user_id"
   end
 
+  create_table "users_programs_ratings", force: :cascade do |t|
+    t.string "rating_type", null: false
+    t.bigint "user_id", null: false
+    t.bigint "program_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["program_id"], name: "index_users_programs_ratings_on_program_id"
+    t.index ["user_id", "program_id"], name: "index_users_programs_ratings_on_user_id_and_program_id", unique: true
+    t.index ["user_id"], name: "index_users_programs_ratings_on_user_id"
+  end
+
   create_table "users_techniques", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "technique_id"
@@ -207,6 +218,8 @@ ActiveRecord::Schema.define(version: 2024_11_24_072229) do
   add_foreign_key "users", "programs"
   add_foreign_key "users_coaches_invitations", "coaches"
   add_foreign_key "users_coaches_invitations", "users"
+  add_foreign_key "users_programs_ratings", "programs"
+  add_foreign_key "users_programs_ratings", "users"
   add_foreign_key "users_techniques", "techniques"
   add_foreign_key "users_techniques", "users"
   add_foreign_key "users_techniques_ratings", "techniques"
