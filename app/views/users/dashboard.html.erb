@@ -1,1 +1,61 @@
 <h1>Users Dashboard</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card equal-height-card">
+            <div class="card-body">
+              <h6 class="card-title">Total progress</h6>
+              <p class="card-text">
+                <span class="big-number">
+                  <%= @user.users_techniques.completed.count %>
+                </span> <%= "#{'technique'.pluralize(@user.users_techniques.completed.count)} completed" %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card equal-height-card">
+            <div class="card-body">
+              <h6 class="card-title">Current progress</h6>
+              <p class="card-text">
+                <span class="big-number">
+                  <%= @user.users_techniques.in_progress.count %>
+                </span> <%= "#{'technique'.pluralize(@user.users_techniques.in_progress.count)} in progress" %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card equal-height-card">
+            <div class="card-body">
+              <h6 class="card-title">Total time</h6>
+              <p class="card-text"><span class="big-number">16</span> hours for techniques</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card equal-height-card">
+            <div class="card-body">
+              <h6 class="card-title">Current time</h6>
+              <p class="card-text"><span class="big-number">16</span> hours for techniques</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Второй блок шириной 4 колонки -->
+    <div class="col-md-4">
+      <!-- Здесь будут ваши вертикальные блоки div -->
+      <div class="block">Четвертый блок</div>
+      <div class="block">Пятый блок</div>
+      <div class="block">Шестой блок</div>
+      <!-- Добавьте столько блоков, сколько вам нужно -->
+    </div>
+  </div>
+</div>
+
+<%= stylesheet_link_tag 'users_dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>

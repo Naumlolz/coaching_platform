@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def dashboard
     redirect_to users_finish_profile_path if current_user.age.blank?
+
+    @user = current_user
   end
 
   def finish_profile; end

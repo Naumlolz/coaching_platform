@@ -18,6 +18,8 @@ class StepsController < ApplicationController
       @show_modal = true
       @step = Step.find(params[:id])
       @current_technique = @step.technique
+      UsersTechnique.find_by(technique_id: @current_technique.id, user_id: current_user.id)
+                    .update(completed: true)
       render action: :show
     end
   rescue ServiceError => e

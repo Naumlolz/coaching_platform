@@ -1,0 +1,29 @@
+.container {
+  text-align: center; /* Центрируем весь контейнер */
+}
+
+.card-title {
+  margin-top: 0px; /* Убираем верхний отступ у заголовка */
+}
+
+.card-text {
+  text-align: center; /* Центрируем весь текст внутри абзаца */
+  margin-bottom: 0;
+}
+
+// .card-body {
+//   height: calc(100% - 40px); /* Учитываем заголовок и отступы */
+//   overflow-y: auto; /* Скроллинг для содержимого карточки */
+// }
+
+.equal-height-card {
+  height: 190px; /* Установите нужную высоту для карточек */
+  overflow-y: auto; /* Добавляем скроллинг, если текст превышает высоту */
+  padding: 10px;
+}
+
+.big-number {
+  display: block;
+  font-size: 40px; /* Размер шрифта для числа */
+  font-weight: bold; /* Жирность шрифта */
+}

@@ -5,6 +5,7 @@ class Users::RestartStepService
   end
 
   def perform
+    uncomplete_users_technique
     destroy_steps
     find_first_step
   end
@@ -12,6 +13,11 @@ class Users::RestartStepService
   private
 
   attr_reader :user_id, :technique_id
+
+  def uncomplete_users_technique
+    UsersTechnique.find_by(user_id: user_id, technique_id: technique_id)
+                  .update(completed: false)
+  end
 
   def destroy_steps
     UserCompletedStep.where(
