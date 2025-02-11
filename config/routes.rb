@@ -77,7 +77,11 @@ Rails.application.routes.draw do
     resource :set_new_password, only: %i[create show]
   end
 
-  namespace :users_programs_ratings do
+  # namespace :users_programs_ratings do
+  #   resource :rating, only: [:create]
+  # end
+
+  namespace :users_techniques_ratings do
     resource :rating, only: [:create]
   end
 

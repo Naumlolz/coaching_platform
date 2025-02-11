@@ -48,7 +48,7 @@
           </div>
           <div class="modal-footer">
             <% [:like, :dislike].each do |type| %>
-              <%= link_to type.to_s.humanize, users_programs_ratings_rating_path(program_id: @current_technique.program_id, rating_type: type), method: :post, class: "btn #{type == :like ? 'btn-success' : 'btn-danger'}" %>
+              <%= link_to type.to_s.humanize, users_techniques_ratings_rating_path(technique_id: @current_technique.id, rate: type), method: :post, class: "btn #{type == :like ? 'btn-success' : 'btn-danger'}" %>
             <% end %>
           </div>
         </div>

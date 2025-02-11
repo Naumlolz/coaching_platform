@@ -1,5 +1,6 @@
 class UsersTechniquesRating < ApplicationRecord
   validates :rate, presence: true
+  validates :rate, inclusion: { in: %w[like dislike] }
 
   belongs_to :user
   belongs_to :technique
