@@ -46,11 +46,19 @@ class StepsController < ApplicationController
     @current_technique = find_step.technique
   end
 
+  def fetch_users_technique
+    UsersTechnique.find_by(
+      user_id: current_user.id,
+      technique_id: set_current_technique.id
+    )
+  end
+
   def set_start_time
     UserCompletedStep.find_or_initialize_by(
       user_id: current_user.id,
       technique_id: set_current_technique.id,
-      step_id: find_step.id
+      step_id: find_step.id,
+      users_technique_id: fetch_users_technique.id
     ).update(start_time: Time.zone.now)
   end
 end

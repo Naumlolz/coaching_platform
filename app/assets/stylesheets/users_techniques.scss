@@ -1,0 +1,15 @@
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.program-name-container {
+  text-align: center;
+}
+
+.btn {
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_02_06_153852) do
+ActiveRecord::Schema.define(version: 2025_02_11_092420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,9 +140,11 @@ ActiveRecord::Schema.define(version: 2025_02_06_153852) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.bigint "users_technique_id"
     t.index ["step_id"], name: "index_user_completed_steps_on_step_id"
     t.index ["technique_id"], name: "index_user_completed_steps_on_technique_id"
     t.index ["user_id"], name: "index_user_completed_steps_on_user_id"
+    t.index ["users_technique_id"], name: "index_user_completed_steps_on_users_technique_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -218,6 +220,7 @@ ActiveRecord::Schema.define(version: 2025_02_06_153852) do
   add_foreign_key "user_completed_steps", "steps"
   add_foreign_key "user_completed_steps", "techniques"
   add_foreign_key "user_completed_steps", "users"
+  add_foreign_key "user_completed_steps", "users_techniques"
   add_foreign_key "users", "coaches"
   add_foreign_key "users", "programs"
   add_foreign_key "users_coaches_invitations", "coaches"

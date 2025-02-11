@@ -5,6 +5,7 @@ class UsersTechnique < ApplicationRecord
 
   belongs_to :user
   belongs_to :technique
+  has_many :user_completed_steps, dependent: :destroy
 
   scope :completed, -> { where(completed: true) }
   scope :in_progress, -> { where(completed: false) }
