@@ -15,6 +15,9 @@
           <% if passed_steps > 0 && current_step.present? %>
             <%= link_to 'Continue', step_path(id: current_step.id),
                 method: :get, class: 'btn btn-dark'%>
+            <%= link_to 'Restart', restart_steps_path(
+                  technique_id: users_technique.technique.id),
+                  method: :post, class: 'btn btn-dark'%>
           <% elsif current_step.present? && current_step.position == 0 %>
             <%= link_to 'Get Started', step_path(id: current_step.id),
                 method: :get, class: 'btn btn-dark'%>

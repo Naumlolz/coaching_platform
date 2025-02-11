@@ -23,4 +23,8 @@ class User < ApplicationRecord
       program_id reset_password_code reset_password_code_sent_at updated_at
     ]
   end
+
+  def total_time_spent
+    user_completed_steps.sum { |step| step.time_spent || 0 }
+  end
 end

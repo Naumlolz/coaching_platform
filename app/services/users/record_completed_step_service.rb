@@ -3,6 +3,7 @@ class Users::RecordCompletedStepService
     @user_id = params[:user_id]
     @technique_id = params[:technique_id]
     @step_id = params[:step_id]
+    @end_time = params[:end_time]
   end
 
   def perform
@@ -13,7 +14,7 @@ class Users::RecordCompletedStepService
 
   private
 
-  attr_reader :user_id, :step_id, :technique_id
+  attr_reader :user_id, :step_id, :technique_id, :end_time
 
   def check_step_validity
     @valid_step = Step.find_by(id: step_id)
@@ -21,10 +22,10 @@ class Users::RecordCompletedStepService
   end
 
   def create_completed_step
-    UserCompletedStep.create(
+    UserCompletedStep.find_or_initialize_by(
       user_id: user_id, technique_id: technique_id,
-      step_id: step_id
-    )
+      step_id: step_id)
+                      .update(end_time: Time.zone.now)
   end
 
   def search_for_next_step

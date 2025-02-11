@@ -32,7 +32,15 @@
           <div class="card equal-height-card">
             <div class="card-body">
               <h6 class="card-title">Total time</h6>
-              <p class="card-text"><span class="big-number">16</span> hours for techniques</p>
+              <p class="card-text">
+                <span class="big-number">
+                  <strong>
+                    <% total_time_spent = @user&.total_time_spent || 0 %>
+                    <%= distance_of_time_in_words(Time.now, Time.now + total_time_spent).match(/\d+/)&.[](0) || 0 %>
+                  </strong>
+                </span>
+                <%= distance_of_time_in_words(Time.now, Time.now + @user.total_time_spent).gsub(/\d+/, '') %> for techniques
+              </p>
             </div>
           </div>
         </div>
