@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :user_completed_steps, dependent: :destroy
   has_many :steps, through: :user_completed_steps
   has_many :messages, dependent: :destroy
+  has_one :users_techniques_time
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[
@@ -24,7 +25,11 @@ class User < ApplicationRecord
     ]
   end
 
+  # def total_time_spent
+  #   user_completed_steps.sum { |step| step.time_spent || 0 }
+  # end
+
   def total_time_spent
-    user_completed_steps.sum { |step| step.time_spent || 0 }
+    users_techniques_time.total_time_spent
   end
 end

@@ -9,6 +9,8 @@ class Users::RecordCompletedStepService
   def perform
     check_step_validity
     create_completed_step
+    finish_completed_step
+    update_total_time_spent
     search_for_next_step
   end
 
@@ -22,10 +24,18 @@ class Users::RecordCompletedStepService
   end
 
   def create_completed_step
-    UserCompletedStep.find_or_initialize_by(
+    @current_step = UserCompletedStep.find_or_initialize_by(
       user_id: user_id, technique_id: technique_id,
       step_id: step_id)
-                      .update(end_time: Time.zone.now)
+  end
+
+  def finish_completed_step
+    @current_step.update(end_time: Time.zone.now)
+  end
+
+  def update_total_time_spent
+    users_techniques_time = UsersTechniquesTime.find_or_create_by(user_id: user_id)
+    users_techniques_time.update(total_time_spent: users_techniques_time.total_time_spent + @current_step.time_spent)
   end
 
   def search_for_next_step
