@@ -32,4 +32,8 @@ class User < ApplicationRecord
   def total_time_spent
     users_techniques_time.total_time_spent
   end
+
+  def has_coach?
+    coach.present?
+  end
 end

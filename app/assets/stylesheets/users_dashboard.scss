@@ -2,6 +2,24 @@
   text-align: center; /* Центрируем весь контейнер */
 }
 
+.row.g-0.d-flex.align-items-center {
+  display: flex;
+  align-items: center; /* Выровняем все элементы по центру вертикально */
+}
+
+.card-body.pl-3 {
+  padding-left: 15px; /* Отступ слева для текста */
+}
+
+.card-body h5,
+.card-body p {
+  margin-bottom: 0; /* Убираем нижний отступ у заголовков и параграфов */
+}
+
+.my-auto img {
+  margin-bottom: 8px; /* Поднимаем нижнюю границу аватарки */
+}
+
 .card-title {
   margin-top: 0px; /* Убираем верхний отступ у заголовка */
 }
@@ -11,10 +29,13 @@
   margin-bottom: 0;
 }
 
-// .card-body {
-//   height: calc(100% - 40px); /* Учитываем заголовок и отступы */
-//   overflow-y: auto; /* Скроллинг для содержимого карточки */
-// }
+.card-body {
+  height: calc(100% - 50px); /* Учитываем заголовок и отступы */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .equal-height-card {
   height: 190px; /* Установите нужную высоту для карточек */
@@ -26,4 +47,30 @@
   display: block;
   font-size: 40px; /* Размер шрифта для числа */
   font-weight: bold; /* Жирность шрифта */
+}
+
+.custom-dropdown::after {
+  display: none; /* Убираем стрелку */
+}
+
+.custom-dropdown::before {
+  content: "\22EE"; /* Добавляем три точки */
+  color: black;
+  font-size: 18px;
+  position: relative;
+  top: -6px;
+  left: 10px;
+}
+
+.custom-dropdown {
+  background-color: transparent !important; /* Делаем фон прозрачным */
+  border: none !important; /* Убираем рамку */
+  padding: 0 !important; /* Уменьшаем отступы */
+  width: auto !important; /* Сужаем ширину до минимально необходимой */
+}
+
+.dropdown-menu-container {
+  position: absolute;
+  top: 15px; /* Отступ сверху */
+  right: 15px; /* Отступ справа */
 }

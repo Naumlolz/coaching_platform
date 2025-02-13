@@ -21,9 +21,11 @@
       <li class="nav-item mr-5">
         <%= link_to 'My Techniques', user_techniques_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item mr-5">
-        <%= link_to 'My Programs', user_programs_path, class: 'nav-link' %>
-      </li>
+      <% if current_user.has_coach? %>
+        <li class="nav-item mr-5">
+          <%= link_to 'My Programs', user_programs_path, class: 'nav-link' %>
+        </li>
+      <% end %>
       <li class="nav-item mr-5">
         <%= link_to 'My Messages', user_messages_path, class: 'nav-link' %>
       </li>
