@@ -10,6 +10,7 @@ class UserMessagesController < ApplicationController
       coach_id: coach.id
     )
     message = service.perform
+    Notifications::MessageToCoachWorker.perform_async(current_user.id)
     @message = message
     serialized_message = serialize_message(message)
 
