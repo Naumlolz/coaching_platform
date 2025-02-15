@@ -7,6 +7,9 @@ class UsersTechniquesRatings::RatingsController < ApplicationController
     if @rating.new_record?
       @rating.rate = params[:rate]
       @rating.save!
+
+      Notifications::TechniqueRateNotificationWorker.perform_async(current_user.id, params[:technique_id], params[:rate])
+
       flash[:notice] = t('flash.ratings.created')
     else
       @rating.update!(rate: params[:rate])

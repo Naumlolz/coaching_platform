@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :user_completed_steps, dependent: :destroy
   has_many :steps, through: :user_completed_steps
   has_many :messages, dependent: :destroy
-  has_one :users_techniques_time
+  has_one :users_techniques_time, dependent: :destroy
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[
@@ -29,11 +29,13 @@ class User < ApplicationRecord
   #   user_completed_steps.sum { |step| step.time_spent || 0 }
   # end
 
-  def total_time_spent
-    users_techniques_time.total_time_spent
+  delegate :total_time_spent, to: :users_techniques_time
+
+  def coach?
+    coach.present?
   end
 
-  def has_coach?
-    coach.present?
+  def public_name
+    [first_name, last_name].join(' ')
   end
 end

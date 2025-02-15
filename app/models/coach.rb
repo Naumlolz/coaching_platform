@@ -11,4 +11,8 @@ class Coach < ApplicationRecord
   has_many :coaches_programs, dependent: :destroy
   has_many :programs, through: :coaches_programs
   has_many :messages, dependent: :destroy
+
+  def public_name
+    [first_name, last_name].join(' ')
+  end
 end

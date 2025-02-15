@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_02_12_060123) do
+ActiveRecord::Schema.define(version: 2025_02_13_113024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,18 @@ ActiveRecord::Schema.define(version: 2025_02_12_060123) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["coach_id"], name: "index_messages_on_coach_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "coach_id", null: false
+    t.string "message", null: false
+    t.boolean "read", default: false
+    t.string "on_click_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["coach_id"], name: "index_notifications_on_coach_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "programs", force: :cascade do |t|
