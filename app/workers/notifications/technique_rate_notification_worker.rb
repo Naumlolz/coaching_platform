@@ -1,16 +1,11 @@
-class Notifications::TechniqueRateNotificationWorker
-  include Sidekiq::Worker
-
-  sidekiq_options retry: false
-
-  def perform(user_id, technique_id, rate)
-    user = User.find(user_id)
-    technique = Technique.find(technique_id)
+class Notifications::TechniqueRateNotificationWorker < Notifications::Notification
+  def perform(args)
+    user = User.find(args['user_id'])
 
     Notifications::TechniqueRateNotificationService.new(
       user: user,
-      technique_id: technique_id,
-      rate: rate
+      technique_id: args['technique_id'],
+      rate: args['rate']
     ).perform
   end
 end

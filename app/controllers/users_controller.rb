@@ -64,6 +64,7 @@ class UsersController < ApplicationController
       user: current_user, coach_id: params[:coach_id]
     ).call
     flash[:success] = I18n.t('success_messages.invitation_sent')
+    Notifications::RequestForCooperationWorker.perform_async(current_user.id, params[:coach_id])
     redirect_to users_dashboard_path
   rescue ServiceError => e
     flash[:error] = e.message
@@ -72,6 +73,7 @@ class UsersController < ApplicationController
 
   def unassign_coach
     user = current_user
+    Notifications::EndCooperationWithCoachWorker.perform_async(user_id: user.id, coach_id: user.coach_id)
     user.update(
       coach_id: nil
     )
