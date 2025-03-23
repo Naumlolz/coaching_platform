@@ -110,8 +110,9 @@ ActiveRecord::Schema.define(version: 2025_02_13_113024) do
     t.bigint "user_id", null: false
     t.bigint "coach_id", null: false
     t.string "message", null: false
-    t.boolean "read", default: false
+    t.boolean "read", default: false, null: false
     t.string "on_click_url"
+    t.boolean "to_user", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["coach_id"], name: "index_notifications_on_coach_id"

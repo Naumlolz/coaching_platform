@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
 
   describe 'associations' do
     it { should have_one_attached(:avatar) }
-    it { should belong_to(:coach).optional  }
+    it { should belong_to(:coach).optional }
     it { should belong_to(:program).optional }
     it { should have_many(:users_techniques) }
     it { should have_many(:techniques).through(:users_techniques) }

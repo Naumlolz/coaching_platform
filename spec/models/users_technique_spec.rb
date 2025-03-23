@@ -5,12 +5,7 @@ RSpec.describe UsersTechnique, type: :model do
     it { should validate_presence_of(:user_id) }
     it { should validate_presence_of(:technique_id) }
     it { should validate_presence_of(:technique_status) }
-    it { should validate_inclusion_of(:technique_status).in_array(
-        [
-          'not_started', 'in_progress', 'completed'
-        ]
-      ) 
-    }
+    it { should validate_inclusion_of(:technique_status).in_array(%w[not_started in_progress completed]) }
   end
 
   describe 'associations' do
