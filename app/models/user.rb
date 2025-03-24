@@ -1,3 +1,4 @@
+# class which represents users
 class User < ApplicationRecord
   has_one_attached :avatar
 

@@ -1,3 +1,4 @@
+# class which represents programs
 class Program < ApplicationRecord
   validates :name, :description, presence: true
 

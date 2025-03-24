@@ -1,3 +1,4 @@
+# class which represents users_techniques
 class UsersTechnique < ApplicationRecord
   # validates :technique_status, presence: true, inclusion: {
   #   in: %w[not_started in_progress completed]

@@ -1,3 +1,4 @@
+# The UsersTechniquesRating class represents the ratings that users give to various programs
 class UsersProgramsRating < ApplicationRecord
   belongs_to :user
   belongs_to :program

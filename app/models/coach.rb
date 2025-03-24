@@ -1,3 +1,4 @@
+# class which represents coaches
 class Coach < ApplicationRecord
   has_one_attached :avatar
 

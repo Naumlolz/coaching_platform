@@ -1,3 +1,4 @@
+# class which represents users_completed steps
 class UserCompletedStep < ApplicationRecord
   belongs_to :user
   belongs_to :step

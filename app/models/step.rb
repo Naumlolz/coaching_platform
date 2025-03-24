@@ -1,3 +1,4 @@
+# class which represents steps
 class Step < ApplicationRecord
   validates :title, :body, :position, presence: true
 

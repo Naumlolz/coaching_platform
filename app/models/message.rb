@@ -1,3 +1,4 @@
+# class which represents messages
 class Message < ApplicationRecord
   validates :body, :user_id, presence: true
   validates :sent_by_coach, inclusion: { in: [true, false] }

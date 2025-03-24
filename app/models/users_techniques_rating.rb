@@ -1,3 +1,4 @@
+# The UsersTechniquesRating class represents the ratings that users give to various techniques
 class UsersTechniquesRating < ApplicationRecord
   validates :rate, presence: true
   validates :rate, inclusion: { in: %w[like dislike] }

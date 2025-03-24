@@ -45,6 +45,7 @@ group :development do
   gem 'spring'
   gem 'sidekiq', '~> 6.0'
   gem 'bullet'
+  gem 'reek'
 end
 
 group :test do

@@ -1,3 +1,4 @@
+# class which represents techniques
 class Technique < ApplicationRecord
   validates :name, :description, presence: true
 
