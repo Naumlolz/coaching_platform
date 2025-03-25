@@ -1,3 +1,4 @@
+# controller which represents actions with steps
 class StepsController < ApplicationController
   before_action :set_current_technique, only: [:show]
   before_action :set_start_time, only: [:show]
@@ -7,8 +8,9 @@ class StepsController < ApplicationController
   end
 
   def perform_complete
+    user_id = current_user.id
     service = Users::RecordCompletedStepService.new(
-      user_id: current_user.id,
+      user_id: user_id,
       technique_id: params[:technique_id],
       step_id: params[:id]
     )
@@ -18,12 +20,12 @@ class StepsController < ApplicationController
     else
       # redirect_to user_techniques_path
       @show_modal = true
-      UsersTechnique.find_by(technique_id: set_current_technique.id, user_id: current_user.id)
+      UsersTechnique.find_by(technique_id: set_current_technique.id, user_id: user_id)
                     .update(completed: true)
       render action: :show
     end
-  rescue ServiceError => e
-    flash.now[:error] = e.message
+  rescue ServiceError => error
+    flash.now[:error] = error.message
     redirect_to user_techniques_path
   end
 

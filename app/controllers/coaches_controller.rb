@@ -1,3 +1,4 @@
+# class which represents coach actions logic
 class CoachesController < ApplicationController
   def dashboard
     redirect_to coaches_finish_profile_path if current_coach.age.blank?
@@ -31,13 +32,12 @@ class CoachesController < ApplicationController
   end
 
   def update_profile
-    updated_coach = current_coach
-    updated_coach.update(coach_params)
-    if updated_coach.valid?
+    current_coach.update(coach_params)
+    if current_coach.valid?
       flash[:success] = 'Your profile was updated'
       redirect_to coaches_profile_path
     else
-      @errors = updated_coach.errors.full_messages
+      @errors = current_coach.errors.full_messages
       render 'profile'
     end
   end
@@ -52,16 +52,10 @@ class CoachesController < ApplicationController
   def change_password; end
 
   def update_password
-    service = Coaches::UpdatePasswordService.new(
-      coach: current_coach,
-      old_password: params[:old_password],
-      new_password: params[:new_password],
-      new_password_confirmation: params[:new_password_confirmation]
-    )
-    service.call
+    Coaches::UpdatePasswordService.new(password_update_params).call
     redirect_to coaches_dashboard_path
-  rescue ServiceError => e
-    flash.now[:error] = e.message
+  rescue ServiceError => error
+    flash.now[:error] = error.message
     render 'change_password'
   end
 
@@ -79,9 +73,9 @@ class CoachesController < ApplicationController
       invite_id: params[:invitation_id]
     ).call
     flash[:success] = I18n.t('success_messages.successfull_assigned_user')
-    redirect_to coaches_waiting_for_confirmation_path
-  rescue ServiceError => e
-    flash[:error] = e.message
+  rescue ServiceError => error
+    flash[:error] = error.message
+  ensure
     redirect_to coaches_waiting_for_confirmation_path
   end
 
@@ -91,5 +85,16 @@ class CoachesController < ApplicationController
       accepted: false
     )
     redirect_to coaches_waiting_for_confirmation_path
+  end
+
+  private
+
+  def password_update_params
+    {
+      coach: current_coach,
+      old_password: params[:old_password],
+      new_password: params[:new_password],
+      new_password_confirmation: params[:new_password_confirmation]
+    }
   end
 end

@@ -1,20 +1,17 @@
+# controller which represents actions with users messages
 class UserMessagesController < ApplicationController
   def index
     @messages = Message.where(user_id: current_user.id)
   end
 
   def create
+    user_id = current_user.id
     coach = current_user.coach
-    service = Users::CreateMessageService.new(
-      body: params[:body], user_id: current_user.id,
-      coach_id: coach.id
-    )
-    message = service.perform
-    Notifications::MessageToCoachWorker.perform_async(current_user.id)
-    @message = message
-    serialized_message = serialize_message(message)
 
-    ActionCable.server.broadcast 'messages_channel', serialized_message
+    message = create_message(user_id: user_id, coach: coach, body: params[:body])
+    send_notification(user_id: user_id)
+    broadcast_message(message: message)
+
     head :no_content
 
     # respond_to do |format|
@@ -22,23 +19,24 @@ class UserMessagesController < ApplicationController
     # end
 
     # redirect_to user_messages_path(user_id: params[:user_id])
-  rescue ServiceError => e
-    flash.now[:error] = e.message
+  rescue ServiceError => error
+    flash.now[:error] = error.message
     user_messages_path
   end
 
   private
 
-  def serialize_message(message)
-    return nil unless message
+  def create_message(user_id:, coach:, body:)
+    service = Users::CreateMessageService.new(body: body, user_id: user_id, coach_id: coach.id)
+    service.perform
+  end
 
-    {
-      id: message.id,
-      body: message.body,
-      sent_by_coach: message.sent_by_coach,
-      user_id: message.user_id,
-      coach_id: message.coach_id,
-      created_at: message.created_at.strftime('%Y-%m-%d %H:%M:%S')
-    }
+  def send_notification(user_id:)
+    Notifications::MessageToCoachWorker.perform_async(user_id)
+  end
+
+  def broadcast_message(message:)
+    serialized_message = MessageSerializer.new(message).as_json
+    ActionCable.server.broadcast('messages_channel', serialized_message)
   end
 end

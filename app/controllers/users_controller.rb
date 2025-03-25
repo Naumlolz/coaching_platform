@@ -1,3 +1,4 @@
+# users controller logic
 class UsersController < ApplicationController
   include BCrypt
 
@@ -24,13 +25,11 @@ class UsersController < ApplicationController
   def profile; end
 
   def update_profile
-    updated_user = current_user
-    updated_user.update(user_params)
-    if updated_user.valid?
+    if update_user_profile
       flash[:success] = I18n.t('success_messages.profile_updated')
       redirect_to users_profile_path
     else
-      @errors = updated_user.errors.full_messages
+      @errors = current_user.errors.full_messages
       render 'profile'
     end
   end
@@ -49,26 +48,28 @@ class UsersController < ApplicationController
       new_password_confirmation: params[:new_password_confirmation]
     ).call
     redirect_to users_dashboard_path
-  rescue ServiceError => e
-    flash.now[:error] = e.message
+  rescue ServiceError => error
+    flash.now[:error] = error.message
     render 'change_password'
   end
 
   def all_coaches
-    @coaches = Coach.all
+    @coaches = Coach.includes(:programs)
     @current_coach = current_user.coach
   end
 
   def invite_coach
+    coach_id = params[:coach_id]
+
     Users::InviteCoachService.new(
-      user: current_user, coach_id: params[:coach_id]
+      user: current_user, coach_id: coach_id
     ).call
-    flash[:success] = I18n.t('success_messages.invitation_sent')
-    Notifications::RequestForCooperationWorker.perform_async(current_user.id, params[:coach_id])
+
+    send_invite_notification(coach_id)
+
     redirect_to users_dashboard_path
-  rescue ServiceError => e
-    flash[:error] = e.message
-    redirect_to users_dashboard_path
+  rescue ServiceError => error
+    flash[:error] = error.message
   end
 
   def unassign_coach
@@ -78,5 +79,16 @@ class UsersController < ApplicationController
       coach_id: nil
     )
     redirect_to users_all_coaches_path
+  end
+
+  private
+
+  def send_invite_notification(coach_id)
+    flash[:success] = I18n.t('success_messages.invitation_sent')
+    Notifications::RequestForCooperationWorker.perform_async(current_user.id, coach_id)
+  end
+
+  def update_user_profile
+    current_user.update(user_params)
   end
 end
