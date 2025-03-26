@@ -1,3 +1,4 @@
+# invite coach by user
 class Users::InviteCoachService
   def initialize(params)
     @user = params[:user]

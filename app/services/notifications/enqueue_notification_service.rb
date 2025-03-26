@@ -1,3 +1,4 @@
+# class which handles enqueue notification
 class Notifications::EnqueueNotificationService
   def initialize(user_id:, technique_id:, rate:)
     @user_id = user_id

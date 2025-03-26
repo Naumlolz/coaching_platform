@@ -16,4 +16,13 @@ class Coach < ApplicationRecord
   def public_name
     [first_name, last_name].join(' ')
   end
+
+  def increment_total_users!
+    update!(total_users_count: total_users_count + 1)
+  end
+
+  def validate_and_raise_error!
+    return if valid?
+    raise ServiceError, errors.full_messages
+  end
 end

@@ -1,3 +1,4 @@
+# trainer invitation acceptance logic handler
 class Coaches::AcceptInviteService
   def initialize(params)
     @coach_id = params[:coach_id]
@@ -20,18 +21,16 @@ class Coaches::AcceptInviteService
   end
 
   def update_invitation
-    @found_invite.update(accepted: true)
-    raise ServiceError, 'You can`t accept invite' if @found_invite.invalid?
+    find_invitation.update(accepted: true)
+    raise ServiceError, 'You can`t accept invite' if find_invitation.invalid?
   end
 
   def assign_coach_to_user
-    assign_status = @found_invite.user.update(coach_id: coach_id)
+    assign_status = find_invitation.user.update(coach_id: coach_id)
     raise ServiceError, 'You cannot assign user' unless assign_status
   end
 
   def increment_total_users
-    coach = Coach.find(coach_id)
-    coach.total_users_count += 1
-    coach.save!
+    Coach.find(coach_id).increment_total_users!
   end
 end

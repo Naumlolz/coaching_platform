@@ -1,3 +1,4 @@
+# update coach expertise logic
 class Coaches::UpdateExpertiseService
   def initialize(params)
     @coach_id = params[:coach_id]

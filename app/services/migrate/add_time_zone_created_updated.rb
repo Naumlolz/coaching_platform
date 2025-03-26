@@ -1,3 +1,4 @@
+# changing timezone to Moscow time
 class Migrate::AddTimeZoneCreatedUpdated < ActiveRecord::Migration[6.1]
   def self.up(table)  
     if ActiveRecord::Base.connection.column_exists?(table.to_sym, :created_at)

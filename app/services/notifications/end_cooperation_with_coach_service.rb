@@ -1,3 +1,4 @@
+# class which handles end cooperation notification
 class Notifications::EndCooperationWithCoachService
   def initialize(params)
     @user_id = params[:user_id]

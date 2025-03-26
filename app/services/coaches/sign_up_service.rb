@@ -15,8 +15,8 @@ class Coaches::SignUpService
   def perform
     check_email_presence
     check_password_confirmation
-    create_coach
-    check_coach_validation
+    coach = create_coach
+    check_coach_validation(coach)
   end
 
   private
@@ -33,7 +33,7 @@ class Coaches::SignUpService
   end
 
   def create_coach
-    @coach = Coach.create(
+    Coach.create(
       first_name: first_name,
       last_name: last_name,
       email: email,
@@ -41,7 +41,7 @@ class Coaches::SignUpService
     )
   end
 
-  def check_coach_validation
-    raise ServiceError, @coach.errors.full_messages unless @coach.valid?
+  def check_coach_validation(coach)
+    coach.validate_and_raise_error!
   end
 end

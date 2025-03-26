@@ -1,3 +1,4 @@
+# class which handles technique rate notification
 class Notifications::TechniqueRateNotificationService
   def initialize(params)
     @technique_id = params[:technique_id]

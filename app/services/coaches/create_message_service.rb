@@ -1,3 +1,4 @@
+# coach message sending logic handler
 class Coaches::CreateMessageService
   def initialize(params)
     @body = params[:body]
@@ -7,8 +8,9 @@ class Coaches::CreateMessageService
   end
 
   def perform
-    create_message
-    message_validation
+    message = create_message
+    validate_message(message)
+    message
   end
 
   private
@@ -16,13 +18,13 @@ class Coaches::CreateMessageService
   attr_reader :body, :sent_by_coach, :coach_id, :user_id
 
   def create_message
-    @message = Message.create(
+    Message.create(
       body: body, sent_by_coach: sent_by_coach,
       coach_id: coach_id, user_id: user_id
     )
   end
 
-  def message_validation
-    raise ServiceError, 'Message is not valid' if @message.invalid?
+  def validate_message(message)
+    raise ServiceError, 'Message is not valid' if message.invalid?
   end
 end

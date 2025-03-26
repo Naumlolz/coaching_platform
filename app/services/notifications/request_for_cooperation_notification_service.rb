@@ -1,3 +1,4 @@
+# class which handles request for cooperation notification
 class Notifications::RequestForCooperationNotificationService
   def initialize(params)
     @user_id = params[:user_id]

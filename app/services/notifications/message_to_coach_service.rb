@@ -1,3 +1,4 @@
+# class which handles message sent to coach notification
 class Notifications::MessageToCoachService
   def initialize(params)
     @user = params[:user]

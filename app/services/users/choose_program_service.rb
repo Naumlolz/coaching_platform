@@ -1,3 +1,4 @@
+# user choose program logic
 class Users::ChooseProgramService
   def initialize(params)
     @user = params[:user]
@@ -21,9 +22,11 @@ class Users::ChooseProgramService
   def create_user_techniques
     techniques = Technique.where(program_id: program_id)
     techniques.each do |technique|
-      next if @technique_ids.include?(technique.id)
+      technique_id = technique.id
+      next if @technique_ids.include?(technique_id)
+
       UsersTechnique.create(
-        user_id: user.id, technique_id: technique.id
+        user_id: user.id, technique_id: technique_id
       )
     end
   end

@@ -35,12 +35,8 @@ class Passwords::SendCodeService
     raise ServiceError, 'User not existing' unless User.exists?(email: email)
   end
 
-  def generate_otp_code
-    OtpCode::OtpCodeGenerator.generate_otp_code
-  end
-
   def send_mail
-    otp_code = generate_otp_code
+    otp_code = OtpCode::OtpCodeGenerator.generate_otp_code
     RestorePasswordJob.perform_now(
       email: email,
       otp_code: otp_code

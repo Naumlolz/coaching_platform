@@ -24,7 +24,7 @@ class Coaches::SignInService
   end
 
   def check_coach_not_nil
-    raise ServiceError, 'The client with this email or password is not found' if fetch_coach.nil?
+    raise ServiceError, 'The client with this email or password is not found' unless fetch_coach&.present?
   end
 
   def hashed_password
